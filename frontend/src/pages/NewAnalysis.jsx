@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { FileSpreadsheet, Loader } from 'lucide-react'
+import { FileSpreadsheet } from 'lucide-react'
 import FileUpload from '../components/ui/FileUpload'
 
 const API_BASE = import.meta.env.VITE_API_URL || 'https://finomaly-ejgp.onrender.com'

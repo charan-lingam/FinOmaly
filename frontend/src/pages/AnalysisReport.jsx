@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react'
 import MScoreGauge from '../components/charts/MScoreGauge'
 import IndicatorChart from '../components/charts/IndicatorChart'
 import TBDSection from '../components/analysis/TBDSection'
-import { TrendingUp, AlertOctagon, FileDown, Loader } from 'lucide-react'
+import { TrendingUp, AlertOctagon, FileDown } from 'lucide-react'
+import { WaveLoader } from '../components/ui/wave-loader'
 
 const API_BASE = import.meta.env.VITE_API_URL || 'https://finomaly-ejgp.onrender.com'
 
@@ -99,7 +100,9 @@ export default function AnalysisReport() {
       </div>
 
       {loading ? (
-        <div style={{ padding: 40, textAlign: 'center' }}><Loader className="spin" /> Loading...</div>
+        <div style={{ padding: '60px 24px', textAlign: 'center', color: '#94a3b8' }}>
+          <WaveLoader message="Loading analysis…" colour="#94a3b8" />
+        </div>
       ) : !analysis ? (
         <div className="card" style={{ padding: 24, textAlign: 'center' }}>
           <h3>No Analysis Available</h3>

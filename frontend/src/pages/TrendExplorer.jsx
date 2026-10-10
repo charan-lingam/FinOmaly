@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { TrendingUp, Building2, Loader, Info } from 'lucide-react'
+import { TrendingUp, Building2, Info } from 'lucide-react'
+import { WaveLoader } from '../components/ui/wave-loader'
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, Legend, ResponsiveContainer, ReferenceLine,
@@ -222,9 +223,8 @@ export default function TrendExplorer() {
       {/* Chart card */}
       <div className="card" style={{ padding: 24 }}>
         {loading ? (
-          <div style={{ padding: 60, textAlign: 'center', color: '#94a3b8' }}>
-            <Loader className="spin" style={{ marginBottom: 8 }} />
-            <div>Loading trend data…</div>
+          <div style={{ padding: '60px 24px', textAlign: 'center', color: '#94a3b8' }}>
+            <WaveLoader message="Loading trend data..." />
           </div>
         ) : !hasData || noData ? (
           <EmptyState />
@@ -366,3 +366,4 @@ function EmptyState() {
     </div>
   )
 }
+

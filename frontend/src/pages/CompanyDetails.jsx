@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import {
-  ArrowLeft, Building2, Loader, AlertTriangle, CheckCircle2,
+  ArrowLeft, Building2, AlertTriangle, CheckCircle2,
   ChevronDown, ChevronRight, TrendingUp, FileBarChart2,
   UploadCloud, Info,
 } from 'lucide-react'
+import { WaveLoader } from '../components/ui/wave-loader'
 import {
   RadarChart, Radar, PolarGrid, PolarAngleAxis, PolarRadiusAxis,
   ResponsiveContainer, Tooltip,
@@ -267,9 +268,8 @@ export default function CompanyDetails() {
 
   if (loading) {
     return (
-      <div style={{ padding: 60, textAlign: 'center', color: '#94a3b8' }}>
-        <Loader className="spin" style={{ marginBottom: 8 }} />
-        <div>Loading analysis history…</div>
+      <div style={{ padding: '60px 24px', textAlign: 'center', color: '#94a3b8', display: 'flex', justifyContent: 'center' }}>
+        <WaveLoader message="Loading analysis history…" colour="#94a3b8" />
       </div>
     )
   }

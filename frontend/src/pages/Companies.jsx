@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
-import { Building2, Search, Plus, ArrowRight, Loader } from 'lucide-react'
+import { Building2, Search, Plus, ArrowRight } from 'lucide-react'
+import { WaveLoader } from '../components/ui/wave-loader'
 import { Link } from 'react-router-dom'
 
 const API_BASE = import.meta.env.VITE_API_URL || 'https://finomaly-ejgp.onrender.com'
@@ -92,7 +93,9 @@ export default function Companies() {
 
       <div className="card">
         {loading ? (
-          <div style={{ padding: 40, textAlign: 'center' }}><Loader className="spin" /> Loading...</div>
+          <div style={{ padding: '60px 24px', textAlign: 'center', color: '#94a3b8' }}>
+            <WaveLoader message="Loading companies…" colour="#94a3b8" />
+          </div>
         ) : companies.length === 0 ? (
           <div style={{ padding: 40, textAlign: 'center' }}>No companies found. Create one to get started!</div>
         ) : (
