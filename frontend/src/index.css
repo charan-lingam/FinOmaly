@@ -26,13 +26,13 @@
   --radius: 0.5rem;
 
   /* Sidebar */
-  --sidebar-bg: #0f172a;
-  --sidebar-border: #1e293b;
-  --sidebar-text: #94a3b8;
-  --sidebar-text-active: #f1f5f9;
-  --sidebar-hover: rgba(255,255,255,0.06);
-  --sidebar-accent: #3b82f6;
-  --sidebar-accent-bg: rgba(59,130,246,0.12);
+  --sidebar-bg: #ffffff;
+  --sidebar-border: #e5e5e5;
+  --sidebar-text: #737373;
+  --sidebar-text-active: #171717;
+  --sidebar-hover: #f5f5f5;
+  --sidebar-accent: #171717;
+  --sidebar-accent-bg: #f5f5f5;
   --sidebar-width: 240px;
 
   /* Main content */

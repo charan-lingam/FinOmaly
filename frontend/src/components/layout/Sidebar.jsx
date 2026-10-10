@@ -90,7 +90,7 @@ export default function Sidebar() {
         <button 
           onClick={handleLogout}
           className="nav-link" 
-          style={{ width: '100%', border: 'none', background: 'transparent', cursor: 'pointer', textAlign: 'left', color: '#fca5a5' }}
+          style={{ width: '100%', border: 'none', background: 'transparent', cursor: 'pointer', textAlign: 'left', color: '#ef4444' }}
         >
           <LogOut size={16} />
           Log Out
