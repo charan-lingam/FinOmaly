@@ -39,7 +39,7 @@ export default function Profile() {
 
   const handleLogout = () => {
     localStorage.removeItem('finomaly_token')
-    navigate('/login')
+    window.location.href = '/login'
   }
 
   if (loading) {
@@ -123,3 +123,4 @@ export default function Profile() {
     </div>
   )
 }
+

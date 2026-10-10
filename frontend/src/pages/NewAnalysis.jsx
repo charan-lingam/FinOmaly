@@ -75,7 +75,7 @@ export default function NewAnalysis() {
             <select 
               value={selectedCompanyId} 
               onChange={e => setSelectedCompanyId(e.target.value)}
-              style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid #e2e8f0' }}
+              style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid var(--border)' }}
               required
             >
               <option value="" disabled>Select a company...</option>

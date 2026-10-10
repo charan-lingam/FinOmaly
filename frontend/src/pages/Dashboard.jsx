@@ -31,8 +31,8 @@ export default function Dashboard() {
     <div className="page-container" style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
       {/* Hero Section */}
       <div style={{
-        backgroundColor: '#ffffff',
-        border: '1px solid #e5e5e5',
+        backgroundColor: 'var(--card-bg)',
+        border: '1px solid var(--border)',
         borderRadius: '24px',
         overflow: 'hidden',
         boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)'
@@ -46,7 +46,7 @@ export default function Dashboard() {
             <Building2 size={24} />
           </div>
           <div>
-            <div style={{ color: '#64748b', fontSize: 14 }}>Total Companies</div>
+            <div style={{ color: 'var(--text-secondary)', fontSize: 14 }}>Total Companies</div>
             <div style={{ fontSize: 24, fontWeight: 'bold' }}>{stats.companies}</div>
           </div>
         </div>
@@ -56,7 +56,7 @@ export default function Dashboard() {
             <Activity size={24} />
           </div>
           <div>
-            <div style={{ color: '#64748b', fontSize: 14 }}>Analyses Run</div>
+            <div style={{ color: 'var(--text-secondary)', fontSize: 14 }}>Analyses Run</div>
             <div style={{ fontSize: 24, fontWeight: 'bold' }}>-</div>
           </div>
         </div>

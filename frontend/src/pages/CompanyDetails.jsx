@@ -72,9 +72,9 @@ function IndicatorRadar({ run }) {
   return (
     <ResponsiveContainer width="100%" height={220}>
       <RadarChart data={data} margin={{ top: 10, right: 20, bottom: 10, left: 20 }}>
-        <PolarGrid stroke="#e2e8f0" />
-        <PolarAngleAxis dataKey="subject" tick={{ fontSize: 11, fill: '#64748b', fontWeight: 700 }} />
-        <PolarRadiusAxis angle={90} domain={[0, 3]} tick={{ fontSize: 9, fill: '#94a3b8' }} tickCount={4} />
+        <PolarGrid stroke="var(--border)" />
+        <PolarAngleAxis dataKey="subject" tick={{ fontSize: 11, fill: 'var(--text-secondary)', fontWeight: 700 }} />
+        <PolarRadiusAxis angle={90} domain={[0, 3]} tick={{ fontSize: 9, fill: 'var(--text-muted)' }} tickCount={4} />
         <Radar
           dataKey="value"
           stroke={run.m_score_result.is_manipulator ? '#ef4444' : '#3b82f6'}
@@ -84,7 +84,7 @@ function IndicatorRadar({ run }) {
         />
         <Tooltip
           formatter={(v, name) => [v.toFixed(3), name]}
-          contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid #e2e8f0' }}
+          contentStyle={{ fontSize: 12, borderRadius: 8, border: '1px solid var(--border)' }}
         />
       </RadarChart>
     </ResponsiveContainer>
@@ -111,25 +111,25 @@ function AnalysisRow({ run, index, isLatest }) {
           width: '100%', display: 'flex', alignItems: 'center', gap: 16,
           padding: '16px 20px', background: 'none', border: 'none',
           cursor: 'pointer', textAlign: 'left',
-          borderBottom: expanded ? '1px solid #e2e8f0' : 'none',
+          borderBottom: expanded ? '1px solid var(--border)' : 'none',
         }}
       >
-        <span style={{ color: '#94a3b8', flexShrink: 0 }}>
+        <span style={{ color: 'var(--text-muted)', flexShrink: 0 }}>
           {expanded ? <ChevronDown size={16} /> : <ChevronRight size={16} />}
         </span>
 
         {/* Year range */}
         <div style={{ flex: 1 }}>
-          <div style={{ fontWeight: 700, fontSize: 14, color: '#1e293b' }}>
+          <div style={{ fontWeight: 700, fontSize: 14, color: 'var(--text-primary)' }}>
             {year_prev} → {year_curr}
             {isLatest && (
               <span style={{
-                marginLeft: 8, background: '#eff6ff', color: '#3b82f6',
+                marginLeft: 8, background: 'var(--tbd-bg)', color: '#3b82f6',
                 fontSize: 10, fontWeight: 700, padding: '1px 7px', borderRadius: 4,
               }}>LATEST</span>
             )}
           </div>
-          <div style={{ fontSize: 12, color: '#94a3b8', marginTop: 2 }}>
+          <div style={{ fontSize: 12, color: 'var(--text-muted)', marginTop: 2 }}>
             {flaggedCount} indicator{flaggedCount !== 1 ? 's' : ''} flagged
           </div>
         </div>
@@ -142,7 +142,7 @@ function AnalysisRow({ run, index, isLatest }) {
           }}>
             {score !== null ? score.toFixed(3) : 'N/A'}
           </div>
-          <div style={{ fontSize: 10, color: '#94a3b8', marginTop: 1 }}>M-Score</div>
+          <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 1 }}>M-Score</div>
         </div>
 
         {/* Risk badge */}
@@ -158,13 +158,13 @@ function AnalysisRow({ run, index, isLatest }) {
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
                 <thead>
-                  <tr style={{ borderBottom: '2px solid #f1f5f9' }}>
-                    <th style={{ padding: '8px 12px', textAlign: 'left', color: '#94a3b8', fontWeight: 600, fontSize: 11 }}>Indicator</th>
-                    <th style={{ padding: '8px 12px', textAlign: 'left', color: '#94a3b8', fontWeight: 600, fontSize: 11 }}>Description</th>
-                    <th style={{ padding: '8px 12px', textAlign: 'right', color: '#94a3b8', fontWeight: 600, fontSize: 11 }}>Coeff</th>
-                    <th style={{ padding: '8px 12px', textAlign: 'right', color: '#94a3b8', fontWeight: 600, fontSize: 11 }}>Value</th>
-                    <th style={{ padding: '8px 12px', textAlign: 'right', color: '#94a3b8', fontWeight: 600, fontSize: 11 }}>Contribution</th>
-                    <th style={{ padding: '8px 12px', textAlign: 'center', color: '#94a3b8', fontWeight: 600, fontSize: 11 }}>Flag</th>
+                  <tr style={{ borderBottom: '2px solid var(--sidebar-bg)' }}>
+                    <th style={{ padding: '8px 12px', textAlign: 'left', color: 'var(--text-muted)', fontWeight: 600, fontSize: 11 }}>Indicator</th>
+                    <th style={{ padding: '8px 12px', textAlign: 'left', color: 'var(--text-muted)', fontWeight: 600, fontSize: 11 }}>Description</th>
+                    <th style={{ padding: '8px 12px', textAlign: 'right', color: 'var(--text-muted)', fontWeight: 600, fontSize: 11 }}>Coeff</th>
+                    <th style={{ padding: '8px 12px', textAlign: 'right', color: 'var(--text-muted)', fontWeight: 600, fontSize: 11 }}>Value</th>
+                    <th style={{ padding: '8px 12px', textAlign: 'right', color: 'var(--text-muted)', fontWeight: 600, fontSize: 11 }}>Contribution</th>
+                    <th style={{ padding: '8px 12px', textAlign: 'center', color: 'var(--text-muted)', fontWeight: 600, fontSize: 11 }}>Flag</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -173,22 +173,22 @@ function AnalysisRow({ run, index, isLatest }) {
                     const flagged = v !== null && ind.risky(v)
                     const contrib = v !== null ? ind.coeff * v : null
                     return (
-                      <tr key={ind.key} style={{ borderBottom: '1px solid #f8fafc', background: flagged ? '#fef9f9' : 'transparent' }}>
+                      <tr key={ind.key} style={{ borderBottom: '1px solid var(--main-bg)', background: flagged ? '#fef9f9' : 'transparent' }}>
                         <td style={{ padding: '9px 12px' }}>
                           <code style={{
-                            background: flagged ? '#fee2e2' : '#f1f5f9',
-                            color: flagged ? '#dc2626' : '#475569',
+                            background: flagged ? '#fee2e2' : 'var(--sidebar-bg)',
+                            color: flagged ? '#dc2626' : 'var(--text-primary)',
                             padding: '2px 6px', borderRadius: 4, fontWeight: 700, fontSize: 11,
                           }}>{ind.key.toUpperCase()}</code>
                         </td>
-                        <td style={{ padding: '9px 12px', color: '#475569', fontSize: 12 }}>{ind.label}</td>
+                        <td style={{ padding: '9px 12px', color: 'var(--text-primary)', fontSize: 12 }}>{ind.label}</td>
                         <td style={{ padding: '9px 12px', textAlign: 'right', color: ind.coeff >= 0 ? '#10b981' : '#ef4444', fontWeight: 600, fontSize: 12 }}>
                           {ind.coeff >= 0 ? '+' : ''}{ind.coeff}
                         </td>
                         <td style={{ padding: '9px 12px', textAlign: 'right', fontWeight: 600 }}>
-                          {v !== null ? v.toFixed(4) : <span style={{ color: '#94a3b8' }}>N/A</span>}
+                          {v !== null ? v.toFixed(4) : <span style={{ color: 'var(--text-muted)' }}>N/A</span>}
                         </td>
-                        <td style={{ padding: '9px 12px', textAlign: 'right', color: '#64748b', fontSize: 12 }}>
+                        <td style={{ padding: '9px 12px', textAlign: 'right', color: 'var(--text-secondary)', fontSize: 12 }}>
                           {contrib !== null ? (contrib >= 0 ? '+' : '') + contrib.toFixed(4) : '—'}
                         </td>
                         <td style={{ padding: '9px 12px', textAlign: 'center' }}>
@@ -198,28 +198,28 @@ function AnalysisRow({ run, index, isLatest }) {
                     )
                   })}
                   {/* Intercept + total */}
-                  <tr style={{ borderTop: '2px solid #f1f5f9', background: '#f8fafc' }}>
-                    <td colSpan={2} style={{ padding: '10px 12px', fontWeight: 600, color: '#64748b', fontSize: 12 }}>Intercept (constant)</td>
+                  <tr style={{ borderTop: '2px solid var(--sidebar-bg)', background: 'var(--main-bg)' }}>
+                    <td colSpan={2} style={{ padding: '10px 12px', fontWeight: 600, color: 'var(--text-secondary)', fontSize: 12 }}>Intercept (constant)</td>
                     <td style={{ padding: '10px 12px', textAlign: 'right', fontWeight: 600, color: '#ef4444', fontSize: 12 }}>-4.84</td>
-                    <td colSpan={2} style={{ padding: '10px 12px', textAlign: 'right', fontSize: 11, color: '#94a3b8' }}>
+                    <td colSpan={2} style={{ padding: '10px 12px', textAlign: 'right', fontSize: 11, color: 'var(--text-muted)' }}>
                       M = {score !== null ? score.toFixed(3) : 'N/A'}
                     </td>
                     <td />
                   </tr>
                 </tbody>
               </table>
-              <div style={{ marginTop: 8, fontSize: 11, color: '#94a3b8', fontFamily: 'monospace', padding: '0 12px' }}>
+              <div style={{ marginTop: 8, fontSize: 11, color: 'var(--text-muted)', fontFamily: 'monospace', padding: '0 12px' }}>
                 M = -4.84 + 0.920(DSRI) + 0.528(GMI) + 0.404(AQI) + 0.892(SGI) + 0.115(DEPI) − 0.172(SGAI) + 4.679(TATA) − 0.327(LVGI)
               </div>
             </div>
 
             {/* Radar chart */}
             <div>
-              <div style={{ fontSize: 12, fontWeight: 600, color: '#475569', marginBottom: 8, textAlign: 'center' }}>
+              <div style={{ fontSize: 12, fontWeight: 600, color: 'var(--text-primary)', marginBottom: 8, textAlign: 'center' }}>
                 Indicator Profile
               </div>
               <IndicatorRadar run={run} />
-              <div style={{ fontSize: 11, color: '#94a3b8', textAlign: 'center', marginTop: 4 }}>
+              <div style={{ fontSize: 11, color: 'var(--text-muted)', textAlign: 'center', marginTop: 4 }}>
                 Outer edge = higher value. Values &gt; 1 may be risky.
               </div>
             </div>
@@ -268,8 +268,8 @@ export default function CompanyDetails() {
 
   if (loading) {
     return (
-      <div style={{ padding: '60px 24px', textAlign: 'center', color: '#94a3b8', display: 'flex', justifyContent: 'center' }}>
-        <WaveLoader message="Loading analysis history…" colour="#94a3b8" />
+      <div style={{ padding: '60px 24px', textAlign: 'center', color: 'var(--text-muted)', display: 'flex', justifyContent: 'center' }}>
+        <WaveLoader message="Loading analysis history…" colour="var(--text-muted)" />
       </div>
     )
   }
@@ -294,7 +294,7 @@ export default function CompanyDetails() {
           <div>
             <h1 className="page-title" style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <Building2 size={20} /> {company.name}
-              <span style={{ fontSize: 14, fontWeight: 500, color: '#64748b' }}>({company.ticker})</span>
+              <span style={{ fontSize: 14, fontWeight: 500, color: 'var(--text-secondary)' }}>({company.ticker})</span>
             </h1>
             <p className="page-description">{company.industry}</p>
           </div>
@@ -332,10 +332,10 @@ export default function CompanyDetails() {
 
       {/* History section label */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-        <FileBarChart2 size={16} style={{ color: '#64748b' }} />
-        <span style={{ fontWeight: 700, fontSize: 14, color: '#1e293b' }}>Analysis History</span>
+        <FileBarChart2 size={16} style={{ color: 'var(--text-secondary)' }} />
+        <span style={{ fontWeight: 700, fontSize: 14, color: 'var(--text-primary)' }}>Analysis History</span>
         {analyses.length > 0 && (
-          <span style={{ background: '#f1f5f9', color: '#64748b', fontSize: 11, fontWeight: 700, padding: '1px 8px', borderRadius: 10 }}>
+          <span style={{ background: 'var(--sidebar-bg)', color: 'var(--text-secondary)', fontSize: 11, fontWeight: 700, padding: '1px 8px', borderRadius: 10 }}>
             {analyses.length} run{analyses.length !== 1 ? 's' : ''}
           </span>
         )}
@@ -344,9 +344,9 @@ export default function CompanyDetails() {
       {/* Analysis runs */}
       {analyses.length === 0 ? (
         <div className="card" style={{ padding: '48px 24px', textAlign: 'center' }}>
-          <FileBarChart2 size={40} style={{ color: '#e2e8f0', marginBottom: 16 }} />
-          <h3 style={{ color: '#475569', marginBottom: 8 }}>No Analysis History Yet</h3>
-          <p style={{ color: '#94a3b8', fontSize: 13, maxWidth: 360, margin: '0 auto 20px' }}>
+          <FileBarChart2 size={40} style={{ color: 'var(--border)', marginBottom: 16 }} />
+          <h3 style={{ color: 'var(--text-primary)', marginBottom: 8 }}>No Analysis History Yet</h3>
+          <p style={{ color: 'var(--text-muted)', fontSize: 13, maxWidth: 360, margin: '0 auto 20px' }}>
             Upload at least two years of financial statements to compute the Beneish M-Score and build a history.
           </p>
           <Link to="/analysis/new" className="btn btn-primary">
@@ -364,8 +364,8 @@ export default function CompanyDetails() {
       {/* Disclaimer */}
       <div style={{
         display: 'flex', gap: 10, padding: '12px 16px', borderRadius: 8,
-        background: '#eff6ff', border: '1px solid #bfdbfe',
-        fontSize: 12, color: '#1e40af', lineHeight: 1.6,
+        background: 'var(--tbd-bg)', border: '1px solid var(--tbd-border)',
+        fontSize: 12, color: 'var(--tbd-text)', lineHeight: 1.6,
       }}>
         <Info size={15} style={{ flexShrink: 0, marginTop: 1 }} />
         <span>
@@ -381,8 +381,8 @@ export default function CompanyDetails() {
 function SummaryCard({ label, value, colour }) {
   return (
     <div className="card" style={{ padding: '16px 20px' }}>
-      <div style={{ fontSize: 12, color: '#94a3b8', marginBottom: 4 }}>{label}</div>
-      <div style={{ fontSize: 22, fontWeight: 700, color: colour || '#1e293b' }}>{value}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 4 }}>{label}</div>
+      <div style={{ fontSize: 22, fontWeight: 700, color: colour || 'var(--text-primary)' }}>{value}</div>
     </div>
   )
 }

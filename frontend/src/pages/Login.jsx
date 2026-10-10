@@ -56,37 +56,37 @@ export default function Login({ setAuth }) {
   }
 
   return (
-    <div style={{ display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f8fafc' }}>
-      <div style={{ width: 400, padding: 32, backgroundColor: 'white', borderRadius: 8, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
+    <div style={{ display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--main-bg)' }}>
+      <div style={{ width: 400, padding: 32, backgroundColor: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: 8, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
         <div style={{ textAlign: 'center', marginBottom: 24, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <CascadeText text="FinOmaly" as="div" fontSize="32px" color="#0f172a" hoverColor="#2563eb" />
-          <p style={{ color: '#64748b', marginTop: 8 }}>Sign in to access your dashboard</p>
+          <CascadeText text="FinOmaly" as="div" fontSize="32px" color="var(--text-primary)" hoverColor="#2563eb" />
+          <p style={{ color: 'var(--text-secondary)', marginTop: 8 }}>Sign in to access your dashboard</p>
         </div>
 
         {error && (
-          <div style={{ padding: 12, backgroundColor: '#fef2f2', color: '#ef4444', borderRadius: 6, marginBottom: 16, fontSize: 14 }}>
+          <div style={{ padding: 12, backgroundColor: 'var(--red-light)', color: '#ef4444', borderRadius: 6, marginBottom: 16, fontSize: 14 }}>
             {error}
           </div>
         )}
 
         <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
           <div>
-            <label style={{ display: 'block', marginBottom: 6, fontSize: 14, fontWeight: 500 }}>Email</label>
+            <label style={{ display: 'block', marginBottom: 6, fontSize: 14, fontWeight: 500, color: 'var(--text-primary)' }}>Email</label>
             <input 
               type="email" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              style={{ width: '100%', padding: '8px 12px', borderRadius: 6, border: '1px solid #e2e8f0' }}
+              style={{ width: '100%', padding: '8px 12px', borderRadius: 6, border: '1px solid var(--border)', backgroundColor: 'var(--main-bg)', color: 'var(--text-primary)' }}
               required 
             />
           </div>
           <div>
-            <label style={{ display: 'block', marginBottom: 6, fontSize: 14, fontWeight: 500 }}>Password</label>
+            <label style={{ display: 'block', marginBottom: 6, fontSize: 14, fontWeight: 500, color: 'var(--text-primary)' }}>Password</label>
             <input 
               type="password" 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              style={{ width: '100%', padding: '8px 12px', borderRadius: 6, border: '1px solid #e2e8f0' }}
+              style={{ width: '100%', padding: '8px 12px', borderRadius: 6, border: '1px solid var(--border)', backgroundColor: 'var(--main-bg)', color: 'var(--text-primary)' }}
               required 
             />
           </div>
@@ -100,17 +100,17 @@ export default function Login({ setAuth }) {
           </button>
         </form>
 
-        <div style={{ marginTop: 24, paddingTop: 16, borderTop: '1px solid #e2e8f0', textAlign: 'center' }}>
-          <p style={{ fontSize: 14, color: '#64748b', marginBottom: 12 }}>
+        <div style={{ marginTop: 24, paddingTop: 16, borderTop: '1px solid var(--border)', textAlign: 'center' }}>
+          <p style={{ fontSize: 14, color: 'var(--text-secondary)', marginBottom: 12 }}>
             Don't have an account?{' '}
             <Link to="/signup" style={{ color: '#2563eb', textDecoration: 'none', fontWeight: 500 }}>
               Sign up
             </Link>
           </p>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, justifyContent: 'center', marginTop: 16 }}>
-            <span style={{ height: 1, backgroundColor: '#e2e8f0', flex: 1 }}></span>
-            <span style={{ fontSize: 12, color: '#94a3b8' }}>OR</span>
-            <span style={{ height: 1, backgroundColor: '#e2e8f0', flex: 1 }}></span>
+            <span style={{ height: 1, backgroundColor: 'var(--border)', flex: 1 }}></span>
+            <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>OR</span>
+            <span style={{ height: 1, backgroundColor: 'var(--border)', flex: 1 }}></span>
           </div>
           <button onClick={handleSeed} type="button" className="btn btn-outline" style={{ fontSize: 12, padding: '4px 8px', marginTop: 16 }}>
             Seed Demo User

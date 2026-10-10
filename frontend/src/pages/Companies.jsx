@@ -74,12 +74,12 @@ export default function Companies() {
 
       {showModal && (
         <div style={{ position: 'fixed', inset: 0, backgroundColor: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50 }}>
-          <div style={{ backgroundColor: 'white', padding: 24, borderRadius: 8, width: 400 }}>
-            <h2 style={{ marginTop: 0 }}>New Company</h2>
+          <div style={{ backgroundColor: 'var(--card-bg)', border: '1px solid var(--border)', padding: 24, borderRadius: 8, width: 400 }}>
+            <h2 style={{ marginTop: 0, color: 'var(--text-primary)' }}>New Company</h2>
             <form onSubmit={handleCreate} style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <input required placeholder="Name (e.g. Tesla)" value={newCompany.name} onChange={e => setNewCompany({...newCompany, name: e.target.value})} style={{ padding: 8 }} />
-              <input required placeholder="Ticker (e.g. TSLA)" value={newCompany.ticker} onChange={e => setNewCompany({...newCompany, ticker: e.target.value})} style={{ padding: 8 }} />
-              <input required placeholder="Industry (e.g. Auto)" value={newCompany.industry} onChange={e => setNewCompany({...newCompany, industry: e.target.value})} style={{ padding: 8 }} />
+              <input required placeholder="Name (e.g. Tesla)" value={newCompany.name} onChange={e => setNewCompany({...newCompany, name: e.target.value})} style={{ padding: 8, background: 'var(--main-bg)', color: 'var(--text-primary)', border: '1px solid var(--border)', borderRadius: 4 }} />
+              <input required placeholder="Ticker (e.g. TSLA)" value={newCompany.ticker} onChange={e => setNewCompany({...newCompany, ticker: e.target.value})} style={{ padding: 8, background: 'var(--main-bg)', color: 'var(--text-primary)', border: '1px solid var(--border)', borderRadius: 4 }} />
+              <input required placeholder="Industry (e.g. Auto)" value={newCompany.industry} onChange={e => setNewCompany({...newCompany, industry: e.target.value})} style={{ padding: 8, background: 'var(--main-bg)', color: 'var(--text-primary)', border: '1px solid var(--border)', borderRadius: 4 }} />
               <div style={{ display: 'flex', gap: 8, marginTop: 12 }}>
                 <button type="button" onClick={() => setShowModal(false)} className="btn btn-outline" style={{ flex: 1 }}>Cancel</button>
                 <button type="submit" disabled={submitting} className="btn btn-primary" style={{ flex: 1 }}>
@@ -101,7 +101,7 @@ export default function Companies() {
         ) : (
           <table style={{ width: '100%', textAlign: 'left', borderCollapse: 'collapse' }}>
             <thead>
-              <tr style={{ borderBottom: '1px solid #eee' }}>
+              <tr>
                 <th style={{ padding: 12 }}>Company</th>
                 <th style={{ padding: 12 }}>Ticker</th>
                 <th style={{ padding: 12 }}>Industry</th>
@@ -111,17 +111,17 @@ export default function Companies() {
             </thead>
             <tbody>
               {companies.map(c => (
-                <tr key={c.id} style={{ borderBottom: '1px solid #eee' }}>
+                <tr key={c.id}>
                   <td style={{ padding: 12 }}>
-                    <div style={{ fontWeight: 600, color: '#1e293b' }}>{c.name}</div>
+                    <div style={{ fontWeight: 600, color: 'var(--text-primary)' }}>{c.name}</div>
                   </td>
                   <td style={{ padding: 12 }}>
-                    <code style={{ background: '#f1f5f9', color: '#475569', padding: '2px 6px', borderRadius: 4, fontSize: 12, fontWeight: 700 }}>
+                    <code style={{ background: 'var(--tbd-bg)', color: 'var(--text-primary)', padding: '2px 6px', borderRadius: 4, fontSize: 12, fontWeight: 700 }}>
                       {c.ticker}
                     </code>
                   </td>
-                  <td style={{ padding: 12, color: '#64748b', fontSize: 13 }}>{c.industry}</td>
-                  <td style={{ padding: 12, color: '#94a3b8', fontSize: 12 }}>
+                  <td style={{ padding: 12, color: 'var(--text-secondary)', fontSize: 13 }}>{c.industry}</td>
+                  <td style={{ padding: 12, color: 'var(--text-muted)', fontSize: 12 }}>
                     {new Date(c.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                   </td>
                   <td style={{ padding: 12 }}>
