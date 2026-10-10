@@ -5,9 +5,9 @@ import { X } from "lucide-react";
 import FeaturedProjectHero, { type FeaturedProject } from "./featured-project-hero";
 
 const settings = {
-  title: "Small details. Lasting impact.",
-  description: "A selection of digital experiences built around the people who use them. Strategy, design, and the details in between.",
-  eyebrow: "Independent design / selected work",
+  title: "Detect Financial Anomalies in Seconds.",
+  description: "Protect your investments using our advanced Beneish M-Score engine. FinOmaly analyzes corporate statements and instantly flags hidden manipulation risks.",
+  eyebrow: "FINANCIAL FRAUD DETECTION / CORE FEATURES",
   projectCount: 3,
   showServices: true,
   showOutcome: true,
@@ -84,15 +84,15 @@ function ProductPreview({ kind, name }: { kind: "north" | "folio" | "relay"; nam
 }
 
 const projects: readonly FeaturedProject[] = [
-  { id: "north", name: "Northstar", category: "Developer tools", year: "2026", summary: "A deployment workspace that turns complex release decisions into a clear, considered flow.", services: ["Product strategy", "Interface design", "Design system"], outcome: "One workflow, from first commit to release.", visual: <div className="fph-demo__visual bg-muted/40 text-foreground" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800')", backgroundSize: 'cover', backgroundPosition: 'center' }} />, visualDescription: "Northstar concept: a deployment dashboard with release activity and production status." },
-  { id: "folio", name: "Folio", category: "Creative software", year: "2026", summary: "An editorial portfolio platform that gives independent studios more room to show what makes their work their own.", services: ["Brand direction", "Web experience", "Motion design"], outcome: "A flexible canvas for independent practices.", visual: <ProductPreview kind="folio" name="Folio" />, visualDescription: "Folio concept: an editorial portfolio with a large headline and two abstract project previews." },
-  { id: "relay", name: "Relay", category: "Team operations", year: "2025", summary: "A shared workspace that brings the brief, the decisions, and the next useful action into focus.", services: ["User research", "Product design", "Frontend"], outcome: "Clear ownership across every handoff.", visual: <ProductPreview kind="relay" name="Relay" />, visualDescription: "Relay concept: a project board with planned, in-progress, and completed tasks." },
+  { id: "analysis", name: "Data Analysis", category: "Core Engine", year: "2026", summary: "Instant processing of financial statements using robust parsing algorithms.", services: ["CSV Parsing", "Real-time Metrics", "Data Integrity"], outcome: "Accurate financial data extraction in milliseconds.", visual: <div className="fph-demo__visual bg-muted/40 text-foreground" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=800')", backgroundSize: 'cover', backgroundPosition: 'center' }} />, visualDescription: "Data Analysis: charts and financial metrics dashboard." },
+  { id: "beneish", name: "Beneish M-Score", category: "Fraud Detection", year: "2026", summary: "An 8-variable model that detects earnings manipulation and flags potential fraud.", services: ["Risk Assessment", "M-Score Calculation", "Anomalies"], outcome: "A clear manipulation probability score.", visual: <div className="fph-demo__visual bg-muted/40 text-foreground" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1559028012-481c04fa702d?auto=format&fit=crop&q=80&w=800')", backgroundSize: 'cover', backgroundPosition: 'center' }} />, visualDescription: "Beneish M-Score: algorithms detecting anomalies." },
+  { id: "security", name: "Secure Workspaces", category: "Infrastructure", year: "2026", summary: "Enterprise-grade security ensuring your corporate data is encrypted and isolated.", services: ["End-to-end Encryption", "Isolated DBs", "Access Control"], outcome: "Complete data privacy and protection.", visual: <div className="fph-demo__visual bg-muted/40 text-foreground" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800')", backgroundSize: 'cover', backgroundPosition: 'center' }} />, visualDescription: "Secure Workspaces: lock and data security visual." },
 ];
 
 const caseNotes: Record<string, { challenge: string; approach: string }> = {
-  north: { challenge: "Release information was spread across tools, making it difficult to see what was ready and what still needed attention.", approach: "Bring deployment activity, release status, and next steps into one quiet workspace. Give each decision a clear place, and use a shared design system to keep the experience consistent." },
-  folio: { challenge: "Independent studios needed a portfolio that could communicate their point of view without competing with the work itself.", approach: "Start with editorial typography and a flexible project grid. Keep the navigation small, the rhythm generous, and the presentation adaptable to different creative practices." },
-  relay: { challenge: "Teams could track tasks, but the reasoning and ownership behind them was harder to find.", approach: "Connect the brief to the board. Make the next action visible, group related decisions, and give every handoff a clear owner and an understandable status." },
+  analysis: { challenge: "Extracting insights from dense corporate statements manually is slow and error-prone.", approach: "Instantly parse CSV statements using FinOmaly's robust engine, turning unstructured numbers into actionable metrics in real time." },
+  beneish: { challenge: "Spotting subtle earnings manipulation without advanced models often leaves investors exposed.", approach: "Calculate the 8-variable Beneish M-Score automatically to flag potential fraud and anomalous reporting before it's too late." },
+  security: { challenge: "Financial data is highly sensitive, requiring strict privacy and protection from external threats.", approach: "Utilize isolated, encrypted workspaces where user data remains strictly private with stringent access controls." },
 };
 
 export default function FeaturedProjectHeroDemo(props: any = {}) {
@@ -108,8 +108,7 @@ export default function FeaturedProjectHeroDemo(props: any = {}) {
 
   return <main className="fph-demo bg-background text-foreground">
     <style>{demoStyles}</style>
-    <FeaturedProjectHero title={config.title} description={config.description} eyebrow={config.eyebrow} projects={visibleProjects} showServices={config.showServices} showOutcome={config.showOutcome} onOpenProject={setOpenProjectId} />
-    <p className="fph-demo__note border-border text-muted-foreground">Concept projects and original interface studies. All names and project stories are fictional.</p>
+    <FeaturedProjectHero title={config.title} description={config.description} eyebrow={config.eyebrow} projects={visibleProjects} showServices={config.showServices} showOutcome={config.showOutcome} onOpenProject={setOpenProjectId} actionLabel="Explore feature" />
     {openProject && <dialog ref={dialog} className="fph-demo__dialog bg-card text-card-foreground" aria-labelledby="fph-case-title" aria-describedby="fph-case-summary" onClose={() => setOpenProjectId(null)}
       onClick={event => {
         if (event.target !== event.currentTarget) return;
@@ -117,7 +116,7 @@ export default function FeaturedProjectHeroDemo(props: any = {}) {
         if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) event.currentTarget.close();
       }}>
       <div className="fph-demo__dialog-body">
-        <div className="fph-demo__dialog-top text-muted-foreground"><span>Concept case study / {openProject.year}</span><button type="button" className="fph-demo__close border-border" aria-label="Close case study" onClick={() => dialog.current?.close()} autoFocus><X width="15" height="15" strokeWidth="1.4" aria-hidden="true" /></button></div>
+        <div className="fph-demo__dialog-top text-muted-foreground"><span>Feature detail / {openProject.year}</span><button type="button" className="fph-demo__close border-border" aria-label="Close feature detail" onClick={() => dialog.current?.close()} autoFocus><X width="15" height="15" strokeWidth="1.4" aria-hidden="true" /></button></div>
         <h2 id="fph-case-title">{openProject.name}</h2><p id="fph-case-summary" className="fph-demo__dialog-summary text-muted-foreground">{openProject.summary}</p>
         <div className="fph-demo__case-section border-border"><h3>The challenge</h3><p className="text-muted-foreground">{caseNotes[openProject.id]!.challenge}</p></div>
         <div className="fph-demo__case-section border-border"><h3>The approach</h3><p className="text-muted-foreground">{caseNotes[openProject.id]!.approach}</p></div>
