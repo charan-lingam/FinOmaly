@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Building2, Activity, AlertTriangle, ArrowRight } from 'lucide-react'
-import FeaturedProjectHeroDemo from '../components/ui/featured-project-demo';
+import { Hero195 } from '../components/ui/hero-195';
 
 const API_BASE = import.meta.env.VITE_API_URL || 'https://finomaly-ejgp.onrender.com'
 
@@ -37,7 +37,7 @@ export default function Dashboard() {
         overflow: 'hidden',
         boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)'
       }}>
-        <FeaturedProjectHeroDemo />
+        <Hero195 />
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 24, marginTop: 24 }}>
