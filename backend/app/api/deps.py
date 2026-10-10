@@ -46,6 +46,8 @@ def get_current_user(
         db.add(membership)
         db.commit()
         db.refresh(user)
+        # Explicitly assign to avoid lazy-loading cache issues
+        user.memberships = [membership]
         
     return user
 
