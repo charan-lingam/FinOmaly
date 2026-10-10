@@ -6,8 +6,8 @@ import CascadeText from '../components/ui/CascadeText'
 const API_BASE = import.meta.env.VITE_API_URL || 'https://finomaly-ejgp.onrender.com'
 
 export default function Login({ setAuth }) {
-  const [email, setEmail] = useState('test@finomaly.com')
-  const [password, setPassword] = useState('testpassword123')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   
@@ -78,6 +78,7 @@ export default function Login({ setAuth }) {
               type="email" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              placeholder="name@example.com"
               style={{ width: '100%', padding: '8px 12px', borderRadius: 6, border: '1px solid var(--border)', backgroundColor: 'var(--main-bg)', color: 'var(--text-primary)' }}
               required 
             />
@@ -88,6 +89,7 @@ export default function Login({ setAuth }) {
               type="password" 
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
               style={{ width: '100%', padding: '8px 12px', borderRadius: 6, border: '1px solid var(--border)', backgroundColor: 'var(--main-bg)', color: 'var(--text-primary)' }}
               required 
             />
