@@ -106,7 +106,7 @@ export default function FeaturedProjectHeroDemo(props: any = {}) {
     if (openProject && dialog.current && !dialog.current.open) dialog.current.showModal();
   }, [openProject]);
 
-  return <main className="fph-demo bg-background text-foreground">
+  return <main className="fph-demo bg-transparent text-foreground">
     <style>{demoStyles}</style>
     <FeaturedProjectHero title={config.title} description={config.description} eyebrow={config.eyebrow} projects={visibleProjects} showServices={config.showServices} showOutcome={config.showOutcome} onOpenProject={setOpenProjectId} actionLabel="Explore feature" />
     {openProject && <dialog ref={dialog} className="fph-demo__dialog bg-card text-card-foreground" aria-labelledby="fph-case-title" aria-describedby="fph-case-summary" onClose={() => setOpenProjectId(null)}
