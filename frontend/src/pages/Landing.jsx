@@ -5,6 +5,7 @@ import CascadeText from '../components/ui/CascadeText';
 import AnimatedTextCycle from '../components/ui/AnimatedTextCycle';
 import { GlassFilter, GlassButton, GlassEffect } from '../components/ui/LiquidGlass';
 import { ArrowRight, ShieldAlert, BarChart3, Lock } from 'lucide-react';
+import FeaturedProjectHeroDemo from '../components/ui/featured-project-demo';
 
 export default function Landing() {
   const navigate = useNavigate();
@@ -27,59 +28,9 @@ export default function Landing() {
       </nav>
 
       {/* Hero Section */}
-      <main style={{ flex: 1, display: 'flex', position: 'relative', overflow: 'hidden' }}>
-        
-        {/* Left Content */}
-        <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '48px 80px', zIndex: 10, position: 'relative' }}>
-          
-          <h1 style={{ fontSize: '72px', fontWeight: 800, lineHeight: 1.1, marginBottom: '24px', letterSpacing: '-0.02em', display: 'flex', flexWrap: 'wrap', gap: '16px', alignItems: 'center' }}>
-            <span>Detect Financial</span> 
-            <span style={{ color: '#3b82f6' }}>
-              <AnimatedTextCycle words={["Anomalies", "Fraud", "Manipulation"]} interval={3500} />
-            </span>
-            <span>in Seconds.</span>
-          </h1>
-          <p style={{ fontSize: '20px', color: '#94a3b8', lineHeight: 1.6, maxWidth: '550px', marginBottom: '48px' }}>
-            Protect your investments using our advanced Beneish M-Score engine. FinOmaly analyzes corporate statements and instantly flags hidden manipulation risks.
-          </p>
-          
-          <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-            <GlassButton onClick={() => navigate('/signup')} style={{ padding: '16px 32px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#fff', fontSize: '18px' }}>
-                Start Analyzing <ArrowRight size={20} />
-              </div>
-            </GlassButton>
-            <Link to="/login" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', border: '1px solid rgba(255,255,255,0.1)', color: '#f8fafc', padding: '16px 32px', borderRadius: '24px', fontSize: '18px', fontWeight: 600, textDecoration: 'none', transition: 'all 0.2s', backgroundColor: 'rgba(255,255,255,0.02)' }} onMouseEnter={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.08)'} onMouseLeave={(e) => e.target.style.backgroundColor = 'rgba(255,255,255,0.02)'}>
-              View Live Demo
-            </Link>
-          </div>
-
-          {/* Feature highlights */}
-          <div style={{ display: 'flex', gap: '24px', marginTop: '72px' }}>
-            {[
-              { icon: ShieldAlert, title: "Fraud Detection", subtitle: "8-Variable M-Score" },
-              { icon: BarChart3, title: "Fast Processing", subtitle: "Instant CSV Parsing" },
-              { icon: Lock, title: "Secure Workspaces", subtitle: "Encrypted DB" }
-            ].map((feat, idx) => (
-              <GlassEffect key={idx} style={{ padding: '16px', borderRadius: '16px', display: 'flex', alignItems: 'center', gap: '16px', minWidth: '220px' }}>
-                <div style={{ padding: '12px', backgroundColor: 'rgba(59,130,246,0.15)', color: '#60a5fa', borderRadius: '12px' }}>
-                  <feat.icon size={24} />
-                </div>
-                <div>
-                  <strong style={{ display: 'block', fontSize: '15px', color: '#fff' }}>{feat.title}</strong>
-                  <span style={{ fontSize: '13px', color: '#94a3b8' }}>{feat.subtitle}</span>
-                </div>
-              </GlassEffect>
-            ))}
-          </div>
-        </div>
-
-        {/* Right Graphic Scene */}
-        <div style={{ flex: 1, position: 'relative' }}>
-          <HeroGraphic />
-        </div>
-
-      </main>
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <FeaturedProjectHeroDemo />
+      </div>
     </div>
   );
 }
