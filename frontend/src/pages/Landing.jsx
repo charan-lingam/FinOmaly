@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import SplineScene from '../components/ui/SplineScene';
+import HeroGraphic from '../components/ui/HeroGraphic';
 import CascadeText from '../components/ui/CascadeText';
 import AnimatedTextCycle from '../components/ui/AnimatedTextCycle';
 import { GlassFilter, GlassButton, GlassEffect } from '../components/ui/LiquidGlass';
@@ -74,14 +74,9 @@ export default function Landing() {
           </div>
         </div>
 
-        {/* Right 3D Scene */}
+        {/* Right Graphic Scene */}
         <div style={{ flex: 1, position: 'relative' }}>
-          {/* Subtle gradient overlay to blend the 3D scene into the dark background */}
-          <div style={{ position: 'absolute', top: 0, bottom: 0, left: 0, width: '150px', background: 'linear-gradient(90deg, #020617 0%, transparent 100%)', zIndex: 5, pointerEvents: 'none' }}></div>
-          <SplineScene 
-            scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode" 
-            style={{ width: '100%', height: '100%', cursor: 'grab' }} 
-          />
+          <HeroGraphic />
         </div>
 
       </main>
