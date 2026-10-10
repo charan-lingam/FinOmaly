@@ -60,4 +60,4 @@ Financial documents are frequently incomplete. The ingestion pipeline and calcul
 ### 3. Frontend UX
 - The frontend will display the successfully computed indicators normally.
 - For indicators that failed due to missing inputs, the UI will display a distinct "Missing Data" state.
-- The main M-Score Gauge will be replaced by a strict "Incomplete Data" prompt, inviting the user to manually provide the missing values via the UI to unlock the final score.
+- The main M-Score Gauge will be replaced by a strict "Incomplete Data" prompt, indicating that the final score cannot be calculated until a complete financial file is uploaded.

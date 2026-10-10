@@ -1,10 +1,12 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import Sidebar from './components/layout/Sidebar'
 import Navbar from './components/layout/Navbar'
 import Dashboard from './pages/Dashboard'
 import Companies from './pages/Companies'
 import NewAnalysis from './pages/NewAnalysis'
 import AnalysisReport from './pages/AnalysisReport'
+import Login from './pages/Login'
 
 function AppLayout({ children }) {
   return (
@@ -20,14 +22,25 @@ function AppLayout({ children }) {
   )
 }
 
+function ProtectedRoute({ isAuth, children }) {
+  if (!isAuth) {
+    return <Navigate to="/login" replace />
+  }
+  return <AppLayout>{children}</AppLayout>
+}
+
 export default function App() {
+  const [isAuth, setIsAuth] = useState(!!localStorage.getItem('finomaly_token'))
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<AppLayout><Dashboard /></AppLayout>} />
-        <Route path="/companies" element={<AppLayout><Companies /></AppLayout>} />
-        <Route path="/analysis/new" element={<AppLayout><NewAnalysis /></AppLayout>} />
-        <Route path="/analysis/report" element={<AppLayout><AnalysisReport /></AppLayout>} />
+        <Route path="/login" element={isAuth ? <Navigate to="/" replace /> : <Login setAuth={setIsAuth} />} />
+        
+        <Route path="/" element={<ProtectedRoute isAuth={isAuth}><Dashboard /></ProtectedRoute>} />
+        <Route path="/companies" element={<ProtectedRoute isAuth={isAuth}><Companies /></ProtectedRoute>} />
+        <Route path="/analysis/new" element={<ProtectedRoute isAuth={isAuth}><NewAnalysis /></ProtectedRoute>} />
+        <Route path="/analysis/report" element={<ProtectedRoute isAuth={isAuth}><AnalysisReport /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   )
