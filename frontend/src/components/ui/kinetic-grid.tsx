@@ -25,8 +25,6 @@ const INFLUENCE_RADIUS = 260;
 const MAX_WARP = 24;
 const DOT_SPACING = 28;
 const LERP_SPEED = 0.08;
-
-const LINE_BASE = { r: 255, g: 255, b: 255, a: 0.13 };
 const NODE_BASE_RADIUS = 1.8;
 const NODE_ACTIVE_RADIUS = 3.2;
 
@@ -152,9 +150,15 @@ export default function KineticGrid({
       const mouse = mouseRef.current;
       const ripples = ripplesRef.current;
 
+      const isDark = document.documentElement.classList.contains("dark");
+      const activeThemeKey = isDark ? (globalColor ?? "default") : "light";
+
       const theme = {
         default: {
           bg: "#020617",
+          dotColor: "rgba(255,255,255,0.05)",
+          lineBase: { r: 255, g: 255, b: 255, a: 0.13 },
+          nodeBase: { r: 255, g: 255, b: 255, a: 0.2 },
           lineActive: { r: 74, g: 158, b: 255, a: 0.9 },
           nodeActive: { r: 74, g: 158, b: 255, a: 1.0 },
           glow: "74,158,255",
@@ -162,12 +166,25 @@ export default function KineticGrid({
         },
         monochrome: {
           bg: "#000000",
+          dotColor: "rgba(255,255,255,0.05)",
+          lineBase: { r: 255, g: 255, b: 255, a: 0.13 },
+          nodeBase: { r: 255, g: 255, b: 255, a: 0.2 },
           lineActive: { r: 255, g: 255, b: 255, a: 0.9 },
           nodeActive: { r: 255, g: 255, b: 255, a: 1.0 },
           glow: "255,255,255",
           ripple: "255,255,255",
         },
-      }[globalColor ?? "default"];
+        light: {
+          bg: "#f1f5f9",
+          dotColor: "rgba(15,23,42,0.05)",
+          lineBase: { r: 15, g: 23, b: 42, a: 0.08 },
+          nodeBase: { r: 15, g: 23, b: 42, a: 0.15 },
+          lineActive: { r: 59, g: 130, b: 246, a: 0.8 },
+          nodeActive: { r: 59, g: 130, b: 246, a: 1.0 },
+          glow: "59,130,246",
+          ripple: "59,130,246",
+        }
+      }[activeThemeKey as "default" | "monochrome" | "light"];
 
       ctx.clearRect(0, 0, W, H);
 
@@ -176,7 +193,7 @@ export default function KineticGrid({
       ctx.fillRect(0, 0, W, H);
 
       // Static background dot texture
-      ctx.fillStyle = "rgba(255,255,255,0.05)";
+      ctx.fillStyle = theme.dotColor;
       for (let x = DOT_SPACING / 2; x < W; x += DOT_SPACING) {
         for (let y = DOT_SPACING / 2; y < H; y += DOT_SPACING) {
           ctx.beginPath();
@@ -230,7 +247,7 @@ export default function KineticGrid({
         ctx.beginPath();
         ctx.moveTo(p1.x, p1.y);
         ctx.lineTo(p2.x, p2.y);
-        ctx.strokeStyle = lerpColor(LINE_BASE, theme.lineActive, t);
+        ctx.strokeStyle = lerpColor(theme.lineBase, theme.lineActive, t);
         ctx.lineWidth = lerpN(0.8, 1.5, t);
         ctx.stroke();
       };
@@ -286,7 +303,7 @@ export default function KineticGrid({
           ctx.beginPath();
           ctx.arc(p.x, p.y, r, 0, Math.PI * 2);
           ctx.fillStyle = lerpColor(
-            { r: 255, g: 255, b: 255, a: 0.2 },
+            theme.nodeBase,
             theme.nodeActive,
             t,
           );
