@@ -1,5 +1,6 @@
-﻿import { useState, useEffect } from 'react'
-import { UploadCloud, FileSpreadsheet, Loader } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import { FileSpreadsheet, Loader } from 'lucide-react'
+import FileUpload from '../components/ui/FileUpload'
 
 const API_BASE = import.meta.env.VITE_API_URL || 'https://finomaly-ejgp.onrender.com'
 
@@ -84,17 +85,8 @@ export default function NewAnalysis() {
             </select>
           </div>
 
-          <div>
-            <label style={{ display: 'block', marginBottom: 8, fontWeight: 500 }}>Upload CSV</label>
-            <div style={{ border: '2px dashed #e2e8f0', borderRadius: 8, padding: 32, textAlign: 'center' }}>
-              <UploadCloud size={32} style={{ color: '#94a3b8', margin: '0 auto', marginBottom: 12 }} />
-              <input 
-                type="file" 
-                accept=".csv" 
-                onChange={e => setFile(e.target.files[0])}
-                required
-              />
-            </div>
+          <div className="mt-4">
+            <FileUpload onFileSelect={(selectedFile) => setFile(selectedFile)} />
           </div>
 
           <button type="submit" disabled={loading || !file || !selectedCompanyId} className="btn btn-primary" style={{ justifyContent: 'center' }}>

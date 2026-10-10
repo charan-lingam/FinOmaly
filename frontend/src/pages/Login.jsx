@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import { LogIn } from 'lucide-react'
+import CascadeText from '../components/ui/CascadeText'
 
 export default function Login({ setAuth }) {
   const [email, setEmail] = useState('test@finomaly.com')
@@ -57,8 +58,8 @@ export default function Login({ setAuth }) {
   return (
     <div style={{ display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center', backgroundColor: '#f8fafc' }}>
       <div style={{ width: 400, padding: 32, backgroundColor: 'white', borderRadius: 8, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
-        <div style={{ textAlign: 'center', marginBottom: 24 }}>
-          <h1 style={{ margin: 0, color: '#0f172a' }}>FinOmaly</h1>
+        <div style={{ textAlign: 'center', marginBottom: 24, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <CascadeText text="FinOmaly" as="div" fontSize="32px" color="#0f172a" hoverColor="#2563eb" />
           <p style={{ color: '#64748b', marginTop: 8 }}>Sign in to access your dashboard</p>
         </div>
 
