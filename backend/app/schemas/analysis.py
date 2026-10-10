@@ -18,3 +18,4 @@ class AnalysisResponse(BaseModel):
     year_curr: str
     year_prev: str
     m_score_result: MScoreResult
+
