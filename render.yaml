@@ -12,3 +12,4 @@ services:
         value: "https://your-vercel-frontend-url.vercel.app" # To be updated once frontend is deployed
       - key: PYTHON_VERSION
         value: "3.11.0"
+
