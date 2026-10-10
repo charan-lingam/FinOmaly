@@ -17,8 +17,9 @@ def login_access_token(
     """
     OAuth2 compatible token login, get an access token for future requests.
     """
-    # Find user by email
-    user = db.scalar(select(User).where(User.email == form_data.username))
+    # Find user by email (normalize it just in case)
+    email = form_data.username.lower().strip()
+    user = db.scalar(select(User).where(User.email == email))
     if not user or not security.verify_password(form_data.password, user.hashed_password):
         raise HTTPException(status_code=400, detail="Incorrect email or password")
         
@@ -63,14 +64,15 @@ def seed_test_user(db: Session = Depends(get_db)):
 @router.post("/signup", status_code=201)
 def signup(data: UserSignup, db: Session = Depends(get_db)):
     """Creates a new user and an associated personal organization."""
-    # Check if user already exists
-    existing_user = db.scalar(select(User).where(User.email == data.email))
+    # Check if user already exists (normalize email)
+    email = data.email.lower().strip()
+    existing_user = db.scalar(select(User).where(User.email == email))
     if existing_user:
         raise HTTPException(status_code=400, detail="User with this email already exists")
         
     # Create user
     user = User(
-        email=data.email,
+        email=email,
         hashed_password=security.get_password_hash(data.password)
     )
     db.add(user)
