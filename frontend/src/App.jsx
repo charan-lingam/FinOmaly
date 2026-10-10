@@ -13,6 +13,7 @@ import Landing from './pages/Landing'
 import CompanyDetails from './pages/CompanyDetails'
 import TrendExplorer from './pages/TrendExplorer'
 import Profile from './pages/Profile'
+import Settings from './pages/Settings'
 
 function AppLayout({ children }) {
   return (
@@ -53,6 +54,7 @@ export default function App() {
           <Route path="/analysis/report" element={<ProtectedRoute isAuth={isAuth}><AnalysisReport /></ProtectedRoute>} />
           <Route path="/trends" element={<ProtectedRoute isAuth={isAuth}><TrendExplorer /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute isAuth={isAuth}><Profile /></ProtectedRoute>} />
+          <Route path="/settings" element={<ProtectedRoute isAuth={isAuth}><Settings /></ProtectedRoute>} />
         </Routes>
       </KineticGrid>
     </BrowserRouter>

@@ -7,6 +7,9 @@ const PAGE_TITLES = {
   '/companies': { title: 'Companies', subtitle: 'Manage companies within your organization' },
   '/analysis/new': { title: 'New Analysis', subtitle: 'Upload financial statements and run M-Score analysis' },
   '/analysis/report': { title: 'Analysis Report', subtitle: 'View Beneish M-Score results and anomaly findings' },
+  '/trends': { title: 'Trend Explorer', subtitle: 'Visualise financial metrics across time' },
+  '/settings': { title: 'Settings', subtitle: 'Manage organization and analysis preferences' },
+  '/profile': { title: 'Profile', subtitle: 'Manage your personal account' }
 }
 
 export default function Navbar() {

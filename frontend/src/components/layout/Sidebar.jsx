@@ -79,11 +79,13 @@ export default function Sidebar() {
 
         <div className="nav-section-label">Account</div>
 
-        <div className="nav-link-tbd">
+        <NavLink
+          to="/settings"
+          className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+        >
           <Settings size={16} />
           Settings
-          <TBDPill />
-        </div>
+        </NavLink>
 
         <button 
           onClick={handleLogout}
