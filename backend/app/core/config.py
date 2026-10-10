@@ -40,7 +40,7 @@ class Settings(BaseSettings):
 
     # ── Project metadata ───────────────────────────────────
     PROJECT_NAME: str = "FinOmaly"
-    VERSION: str = "0.2.0"
+    VERSION: str = "0.3.0"
     API_PREFIX: str = "/api/v1"
 
     # ── CORS ───────────────────────────────────────────────
