@@ -619,3 +619,19 @@ tbody td {
   --tbd-border: rgba(245,158,11,0.2);
   --tbd-text: #fcd34d;
 }
+
+/* Forms */
+input, select, textarea {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  outline: none;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--blue) !important;
+}
+
+option {
+  background: var(--sidebar-bg);
+  color: var(--text-primary);
+}
