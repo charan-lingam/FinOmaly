@@ -12,7 +12,7 @@ export default function Login({ setAuth }) {
 
   const handleSeed = async () => {
     try {
-      await fetch('http://localhost:8000/api/v1/seed', { method: 'POST' })
+      await fetch('https://finomaly-ejgp.onrender.com/api/v1/seed', { method: 'POST' })
       alert('Test user seeded in database!')
     } catch (err) {
       console.error(err)
@@ -30,7 +30,7 @@ export default function Login({ setAuth }) {
       formData.append('username', email)
       formData.append('password', password)
 
-      const response = await fetch('http://localhost:8000/api/v1/login/access-token', {
+      const response = await fetch('https://finomaly-ejgp.onrender.com/api/v1/login/access-token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formData.toString()
