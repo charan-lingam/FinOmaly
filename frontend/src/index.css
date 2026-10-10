@@ -618,7 +618,20 @@ tbody td {
   --tbd-bg: rgba(245,158,11,0.05);
   --tbd-border: rgba(245,158,11,0.2);
   --tbd-text: #fcd34d;
+
+  /* Status tints in dark mode */
+  --red-light: rgba(239, 68, 68, 0.15);
+  --green-light: rgba(16, 185, 129, 0.15);
+  --blue-light: rgba(59, 130, 246, 0.15);
+  --amber-light: rgba(245, 158, 11, 0.15);
+  --purple-light: rgba(139, 92, 246, 0.15);
 }
+
+.dark .badge-green  { background: rgba(16, 185, 129, 0.15);  color: #34d399; border: 1px solid rgba(16, 185, 129, 0.3); }
+.dark .badge-red    { background: rgba(239, 68, 68, 0.15);    color: #f87171; border: 1px solid rgba(239, 68, 68, 0.3); }
+.dark .badge-amber  { background: rgba(245, 158, 11, 0.15);  color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.3); }
+.dark .badge-blue   { background: rgba(59, 130, 246, 0.15);   color: #60a5fa; border: 1px solid rgba(59, 130, 246, 0.3); }
+.dark .badge-muted  { background: rgba(255, 255, 255, 0.06); color: #94a3b8; border: 1px solid var(--border); }
 
 /* Forms */
 input, select, textarea {

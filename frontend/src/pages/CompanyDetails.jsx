@@ -34,7 +34,8 @@ function RiskBadge({ isManipulator, size = 'md' }) {
     return (
       <span style={{
         display: 'inline-flex', alignItems: 'center', gap: 4,
-        background: '#fee2e2', color: '#dc2626', borderRadius: 20,
+        background: 'rgba(239, 68, 68, 0.15)', color: '#ef4444',
+        border: '1px solid rgba(239, 68, 68, 0.3)', borderRadius: 20,
         padding: sm ? '2px 10px' : '6px 14px',
         fontSize: sm ? 11 : 12, fontWeight: 700,
       }}>
@@ -45,7 +46,8 @@ function RiskBadge({ isManipulator, size = 'md' }) {
   return (
     <span style={{
       display: 'inline-flex', alignItems: 'center', gap: 4,
-      background: '#dcfce7', color: '#16a34a', borderRadius: 20,
+      background: 'rgba(16, 185, 129, 0.15)', color: '#10b981',
+      border: '1px solid rgba(16, 185, 129, 0.3)', borderRadius: 20,
       padding: sm ? '2px 10px' : '6px 14px',
       fontSize: sm ? 11 : 12, fontWeight: 700,
     }}>
@@ -124,8 +126,9 @@ function AnalysisRow({ run, index, isLatest }) {
             {year_prev} → {year_curr}
             {isLatest && (
               <span style={{
-                marginLeft: 8, background: 'var(--tbd-bg)', color: '#3b82f6',
-                fontSize: 10, fontWeight: 700, padding: '1px 7px', borderRadius: 4,
+                marginLeft: 8, background: 'rgba(59, 130, 246, 0.15)', color: '#60a5fa',
+                border: '1px solid rgba(59, 130, 246, 0.3)',
+                fontSize: 10, fontWeight: 700, padding: '2px 7px', borderRadius: 4,
               }}>LATEST</span>
             )}
           </div>
@@ -158,7 +161,7 @@ function AnalysisRow({ run, index, isLatest }) {
             <div style={{ overflowX: 'auto' }}>
               <table style={{ width: '100%', borderCollapse: 'collapse', fontSize: 13 }}>
                 <thead>
-                  <tr style={{ borderBottom: '2px solid var(--sidebar-bg)' }}>
+                  <tr style={{ borderBottom: '1px solid var(--border)' }}>
                     <th style={{ padding: '8px 12px', textAlign: 'left', color: 'var(--text-muted)', fontWeight: 600, fontSize: 11 }}>Indicator</th>
                     <th style={{ padding: '8px 12px', textAlign: 'left', color: 'var(--text-muted)', fontWeight: 600, fontSize: 11 }}>Description</th>
                     <th style={{ padding: '8px 12px', textAlign: 'right', color: 'var(--text-muted)', fontWeight: 600, fontSize: 11 }}>Coeff</th>
@@ -173,11 +176,19 @@ function AnalysisRow({ run, index, isLatest }) {
                     const flagged = v !== null && ind.risky(v)
                     const contrib = v !== null ? ind.coeff * v : null
                     return (
-                      <tr key={ind.key} style={{ borderBottom: '1px solid var(--main-bg)', background: flagged ? '#fef9f9' : 'transparent' }}>
+                      <tr 
+                        key={ind.key} 
+                        style={{ 
+                          borderBottom: '1px solid var(--border)', 
+                          background: flagged ? 'rgba(239, 68, 68, 0.08)' : 'transparent',
+                          transition: 'background 0.15s ease'
+                        }}
+                      >
                         <td style={{ padding: '9px 12px' }}>
                           <code style={{
-                            background: flagged ? '#fee2e2' : 'var(--sidebar-bg)',
-                            color: flagged ? '#dc2626' : 'var(--text-primary)',
+                            background: flagged ? 'rgba(239, 68, 68, 0.18)' : 'rgba(255, 255, 255, 0.05)',
+                            color: flagged ? '#f87171' : 'var(--text-primary)',
+                            border: flagged ? '1px solid rgba(239, 68, 68, 0.3)' : '1px solid var(--border)',
                             padding: '2px 6px', borderRadius: 4, fontWeight: 700, fontSize: 11,
                           }}>{ind.key.toUpperCase()}</code>
                         </td>
@@ -185,7 +196,7 @@ function AnalysisRow({ run, index, isLatest }) {
                         <td style={{ padding: '9px 12px', textAlign: 'right', color: ind.coeff >= 0 ? '#10b981' : '#ef4444', fontWeight: 600, fontSize: 12 }}>
                           {ind.coeff >= 0 ? '+' : ''}{ind.coeff}
                         </td>
-                        <td style={{ padding: '9px 12px', textAlign: 'right', fontWeight: 600 }}>
+                        <td style={{ padding: '9px 12px', textAlign: 'right', fontWeight: 600, color: 'var(--text-primary)' }}>
                           {v !== null ? v.toFixed(4) : <span style={{ color: 'var(--text-muted)' }}>N/A</span>}
                         </td>
                         <td style={{ padding: '9px 12px', textAlign: 'right', color: 'var(--text-secondary)', fontSize: 12 }}>
@@ -198,7 +209,7 @@ function AnalysisRow({ run, index, isLatest }) {
                     )
                   })}
                   {/* Intercept + total */}
-                  <tr style={{ borderTop: '2px solid var(--sidebar-bg)', background: 'var(--main-bg)' }}>
+                  <tr style={{ borderTop: '2px solid var(--border)', background: 'rgba(255, 255, 255, 0.02)' }}>
                     <td colSpan={2} style={{ padding: '10px 12px', fontWeight: 600, color: 'var(--text-secondary)', fontSize: 12 }}>Intercept (constant)</td>
                     <td style={{ padding: '10px 12px', textAlign: 'right', fontWeight: 600, color: '#ef4444', fontSize: 12 }}>-4.84</td>
                     <td colSpan={2} style={{ padding: '10px 12px', textAlign: 'right', fontSize: 11, color: 'var(--text-muted)' }}>
