@@ -1,5 +1,6 @@
 import { useLocation } from 'react-router-dom'
 import { Bell, User } from 'lucide-react'
+import { ModeToggle } from '../mode-toggle'
 
 const PAGE_TITLES = {
   '/': { title: 'Dashboard', subtitle: 'Overview of your financial analysis activity' },
@@ -23,6 +24,7 @@ export default function Navbar() {
 
       {/* Right side actions */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+        <ModeToggle />
         <button
           className="btn btn-outline btn-sm"
           style={{ opacity: 0.5, cursor: 'not-allowed' }}
