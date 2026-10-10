@@ -6,7 +6,6 @@ import {
   FileBarChart2,
   Settings,
   TrendingUp,
-  ShieldAlert,
   LogOut
 } from 'lucide-react'
 
@@ -24,9 +23,6 @@ export default function Sidebar() {
       {/* Logo */}
       <div className="sidebar-logo">
         <div className="sidebar-logo-mark">
-          <div className="logo-icon">
-            <ShieldAlert size={18} />
-          </div>
           <div>
             <div className="logo-text">FinOmaly</div>
             <div className="logo-sub">Financial Forensics</div>
