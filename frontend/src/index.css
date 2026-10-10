@@ -504,7 +504,7 @@ tbody tr:last-child {
 }
 
 tbody tr:hover {
-  background: #f8fafc;
+  background: rgba(255, 255, 255, 0.05);
 }
 
 tbody td {
