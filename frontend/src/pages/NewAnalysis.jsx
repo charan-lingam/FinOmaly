@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { FileUploadCard } from '../components/ui/file-upload-card'
+import { FileUpload } from '../components/ui/file-upload'
 
 const API_BASE = import.meta.env.VITE_API_URL || 'https://finomaly-ejgp.onrender.com'
 
@@ -9,6 +10,7 @@ export default function NewAnalysis() {
   const [files, setFiles] = useState([])
   const [loading, setLoading] = useState(false)
   const [globalSuccess, setGlobalSuccess] = useState(false)
+  const [uploadMode, setUploadMode] = useState('grid') // 'grid' | 'card'
 
   useEffect(() => {
     const fetchCompanies = async () => {
@@ -124,14 +126,59 @@ export default function NewAnalysis() {
           </select>
         </div>
 
+        {/* View Mode Toggle */}
+        <div style={{ display: 'flex', gap: 10, justifyContent: 'center' }}>
+          <button
+            type="button"
+            onClick={() => setUploadMode('grid')}
+            style={{
+              padding: '6px 16px',
+              borderRadius: 6,
+              fontSize: '0.85rem',
+              fontWeight: 500,
+              cursor: 'pointer',
+              border: '1px solid var(--border)',
+              backgroundColor: uploadMode === 'grid' ? 'var(--blue, #3b82f6)' : 'var(--card-bg)',
+              color: uploadMode === 'grid' ? '#ffffff' : 'var(--text-secondary)'
+            }}
+          >
+            Animated Dropzone
+          </button>
+          <button
+            type="button"
+            onClick={() => setUploadMode('card')}
+            style={{
+              padding: '6px 16px',
+              borderRadius: 6,
+              fontSize: '0.85rem',
+              fontWeight: 500,
+              cursor: 'pointer',
+              border: '1px solid var(--border)',
+              backgroundColor: uploadMode === 'card' ? 'var(--blue, #3b82f6)' : 'var(--card-bg)',
+              color: uploadMode === 'card' ? '#ffffff' : 'var(--text-secondary)'
+            }}
+          >
+            Queue Card View
+          </button>
+        </div>
+
         {/* File Upload Component */}
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <FileUploadCard 
-            className="w-full"
-            files={files}
-            onFilesChange={handleFilesChange}
-            onFileRemove={handleFileRemove}
-          />
+          {uploadMode === 'grid' ? (
+            <div 
+              className="w-full rounded-xl border border-dashed overflow-hidden" 
+              style={{ borderColor: 'var(--border)', backgroundColor: 'var(--card-bg)' }}
+            >
+              <FileUpload onChange={handleFilesChange} />
+            </div>
+          ) : (
+            <FileUploadCard 
+              className="w-full"
+              files={files}
+              onFilesChange={handleFilesChange}
+              onFileRemove={handleFileRemove}
+            />
+          )}
         </div>
 
         {/* Submit Actions */}
