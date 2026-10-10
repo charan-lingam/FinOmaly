@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import {
   LayoutDashboard,
   Building2,
@@ -7,11 +7,19 @@ import {
   Settings,
   TrendingUp,
   ShieldAlert,
+  LogOut
 } from 'lucide-react'
 
 const TBDPill = () => <span className="nav-tbd-pill">TBD</span>
 
 export default function Sidebar() {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('finomaly_token');
+    navigate('/welcome');
+  };
+
   return (
     <aside className="sidebar">
       {/* Logo */}
@@ -79,13 +87,22 @@ export default function Sidebar() {
           Settings
           <TBDPill />
         </div>
+
+        <button 
+          onClick={handleLogout}
+          className="nav-link" 
+          style={{ width: '100%', border: 'none', background: 'transparent', cursor: 'pointer', textAlign: 'left', color: '#fca5a5' }}
+        >
+          <LogOut size={16} />
+          Log Out
+        </button>
       </nav>
 
       {/* Footer */}
       <div className="sidebar-footer">
         <div className="sidebar-org">
           <strong>Acme Corp</strong>
-          Organization · <span style={{ color: '#fbbf24', fontWeight: 600 }}>Auth TBD</span>
+          Organization A
         </div>
       </div>
     </aside>
