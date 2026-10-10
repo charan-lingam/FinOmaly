@@ -10,6 +10,7 @@ import Login from './pages/Login'
 import Signup from './pages/Signup'
 import Landing from './pages/Landing'
 import CompanyDetails from './pages/CompanyDetails'
+import TrendExplorer from './pages/TrendExplorer'
 
 function AppLayout({ children }) {
   return (
@@ -47,6 +48,7 @@ export default function App() {
         <Route path="/companies/:id" element={<ProtectedRoute isAuth={isAuth}><CompanyDetails /></ProtectedRoute>} />
         <Route path="/analysis/new" element={<ProtectedRoute isAuth={isAuth}><NewAnalysis /></ProtectedRoute>} />
         <Route path="/analysis/report" element={<ProtectedRoute isAuth={isAuth}><AnalysisReport /></ProtectedRoute>} />
+        <Route path="/trends" element={<ProtectedRoute isAuth={isAuth}><TrendExplorer /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   )

@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
 from app.api import auth
-from app.api.routes import companies, statements, analyses
+from app.api.routes import companies, statements, analyses, trends
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -26,6 +26,7 @@ app.include_router(auth.router, prefix=settings.API_PREFIX, tags=["auth"])
 app.include_router(companies.router, prefix=f"{settings.API_PREFIX}/companies", tags=["companies"])
 app.include_router(statements.router, prefix=f"{settings.API_PREFIX}/statements", tags=["statements"])
 app.include_router(analyses.router, prefix=f"{settings.API_PREFIX}/analyses", tags=["analyses"])
+app.include_router(trends.router, prefix=f"{settings.API_PREFIX}/trends", tags=["trends"])
 
 @app.get("/")
 def root():

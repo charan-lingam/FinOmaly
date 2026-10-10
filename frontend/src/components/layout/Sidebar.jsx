@@ -69,11 +69,13 @@ export default function Sidebar() {
           Analysis Report
         </NavLink>
 
-        <div className="nav-link-tbd">
+        <NavLink
+          to="/trends"
+          className={({ isActive }) => `nav-link${isActive ? ' active' : ''}`}
+        >
           <TrendingUp size={16} />
           Trend Explorer
-          <TBDPill />
-        </div>
+        </NavLink>
 
         <div className="nav-section-label">Account</div>
 
