@@ -13,11 +13,10 @@ import {
 const TBDPill = () => <span className="nav-tbd-pill">TBD</span>
 
 export default function Sidebar() {
-  const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem('finomaly_token');
-    navigate('/welcome');
+    window.location.href = '/welcome';
   };
 
   return (
