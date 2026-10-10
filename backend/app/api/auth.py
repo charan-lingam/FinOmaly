@@ -6,7 +6,7 @@ from sqlalchemy import select
 from app.db.session import get_db
 from app.core import security
 from app.models.user import User, Organization, OrganizationMembership
-from app.schemas.user import Token
+from app.schemas.user import Token, UserSignup
 
 router = APIRouter()
 
@@ -60,3 +60,34 @@ def seed_test_user(db: Session = Depends(get_db)):
     
     return {"msg": "Created test user: test@finomaly.com / testpassword123"}
 
+@router.post("/signup", status_code=201)
+def signup(data: UserSignup, db: Session = Depends(get_db)):
+    """Creates a new user and an associated personal organization."""
+    # Check if user already exists
+    existing_user = db.scalar(select(User).where(User.email == data.email))
+    if existing_user:
+        raise HTTPException(status_code=400, detail="User with this email already exists")
+        
+    # Create user
+    user = User(
+        email=data.email,
+        hashed_password=security.get_password_hash(data.password)
+    )
+    db.add(user)
+    
+    # Create org
+    org_name = data.org_name if data.org_name else f"{data.email}'s Workspace"
+    org = Organization(name=org_name)
+    db.add(org)
+    db.flush() # get IDs
+    
+    # Link them
+    membership = OrganizationMembership(
+        user_id=user.id,
+        organization_id=org.id,
+        role="owner"
+    )
+    db.add(membership)
+    db.commit()
+    
+    return {"msg": "Signup successful"}

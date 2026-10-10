@@ -15,9 +15,11 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password: str
 
+class UserSignup(UserCreate):
+    org_name: Optional[str] = None
+
 class UserResponse(UserBase):
     id: uuid.UUID
     
     class Config:
         from_attributes = True
-

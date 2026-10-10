@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { LogIn } from 'lucide-react'
 
 export default function Login({ setAuth }) {
@@ -100,9 +100,19 @@ export default function Login({ setAuth }) {
         </form>
 
         <div style={{ marginTop: 24, paddingTop: 16, borderTop: '1px solid #e2e8f0', textAlign: 'center' }}>
-          <p style={{ fontSize: 12, color: '#64748b', marginBottom: 8 }}>Need an account? (Demo only)</p>
-          <button onClick={handleSeed} className="btn btn-outline" style={{ fontSize: 12, padding: '4px 8px' }}>
-            Seed Test User
+          <p style={{ fontSize: 14, color: '#64748b', marginBottom: 12 }}>
+            Don't have an account?{' '}
+            <Link to="/signup" style={{ color: '#2563eb', textDecoration: 'none', fontWeight: 500 }}>
+              Sign up
+            </Link>
+          </p>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, justifyContent: 'center', marginTop: 16 }}>
+            <span style={{ height: 1, backgroundColor: '#e2e8f0', flex: 1 }}></span>
+            <span style={{ fontSize: 12, color: '#94a3b8' }}>OR</span>
+            <span style={{ height: 1, backgroundColor: '#e2e8f0', flex: 1 }}></span>
+          </div>
+          <button onClick={handleSeed} type="button" className="btn btn-outline" style={{ fontSize: 12, padding: '4px 8px', marginTop: 16 }}>
+            Seed Demo User
           </button>
         </div>
       </div>
