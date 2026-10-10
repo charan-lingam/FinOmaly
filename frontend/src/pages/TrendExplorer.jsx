@@ -211,9 +211,9 @@ export default function TrendExplorer() {
             onClick={() => setActiveTab(t.id)}
             style={{
               padding: '6px 16px', borderRadius: 20, fontSize: 13, fontWeight: 500,
-              border: activeTab === t.id ? '1.5px solid var(--text-primary)' : '1.5px solid var(--border)',
-              background: activeTab === t.id ? 'var(--text-primary)' : '#fff',
-              color: activeTab === t.id ? '#fff' : 'var(--text-primary)',
+              border: activeTab === t.id ? '1px solid var(--blue)' : '1px solid var(--border)',
+              background: activeTab === t.id ? 'var(--blue)' : 'rgba(255,255,255,0.05)',
+              color: activeTab === t.id ? '#fff' : 'var(--text-secondary)',
               cursor: 'pointer', transition: 'all 0.15s',
             }}
           >{t.label}</button>
