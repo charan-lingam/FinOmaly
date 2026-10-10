@@ -80,7 +80,7 @@ function CustomTooltip({ active, payload, label, isBeneish, isMScore }) {
   if (!active || !payload?.length) return null
   return (
     <div style={{
-      background: '#0f172a', color: '#f1f5f9',
+      background: '#0f172a', color: 'var(--sidebar-bg)',
       padding: '10px 14px', borderRadius: 8,
       fontSize: 12.5, lineHeight: 1.8, minWidth: 160,
     }}>
@@ -91,7 +91,7 @@ function CustomTooltip({ active, payload, label, isBeneish, isMScore }) {
           {': '}
           <strong style={{ color: isMScore
             ? (p.value > THRESHOLD ? '#ef4444' : '#10b981')
-            : isBeneish ? (p.value > 1 ? '#ef4444' : '#10b981') : '#f1f5f9'
+            : isBeneish ? (p.value > 1 ? '#ef4444' : '#10b981') : 'var(--sidebar-bg)'
           }}>
             {p.value !== null && p.value !== undefined ? (isBeneish || isMScore ? p.value.toFixed(3) : fmt(p.value)) : 'N/A'}
           </strong>
@@ -172,13 +172,13 @@ export default function TrendExplorer() {
 
         {/* Company picker */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <Building2 size={18} style={{ color: '#64748b' }} />
+          <Building2 size={18} style={{ color: 'var(--text-secondary)' }} />
           <select
             value={selectedId}
             onChange={e => setSelectedId(e.target.value)}
             style={{
               padding: '8px 12px', borderRadius: 8,
-              border: '1px solid #e2e8f0', fontSize: 14,
+              border: '1px solid var(--border)', fontSize: 14,
               background: '#fff', cursor: 'pointer',
             }}
           >
@@ -211,9 +211,9 @@ export default function TrendExplorer() {
             onClick={() => setActiveTab(t.id)}
             style={{
               padding: '6px 16px', borderRadius: 20, fontSize: 13, fontWeight: 500,
-              border: activeTab === t.id ? '1.5px solid #1e293b' : '1.5px solid #e2e8f0',
-              background: activeTab === t.id ? '#1e293b' : '#fff',
-              color: activeTab === t.id ? '#fff' : '#475569',
+              border: activeTab === t.id ? '1.5px solid var(--text-primary)' : '1.5px solid var(--border)',
+              background: activeTab === t.id ? 'var(--text-primary)' : '#fff',
+              color: activeTab === t.id ? '#fff' : 'var(--text-primary)',
               cursor: 'pointer', transition: 'all 0.15s',
             }}
           >{t.label}</button>
@@ -223,7 +223,7 @@ export default function TrendExplorer() {
       {/* Chart card */}
       <div className="card" style={{ padding: 24 }}>
         {loading ? (
-          <div style={{ padding: '60px 24px', textAlign: 'center', color: '#94a3b8' }}>
+          <div style={{ padding: '60px 24px', textAlign: 'center', color: 'var(--text-muted)' }}>
             <WaveLoader message="Loading trend data..." />
           </div>
         ) : !hasData || noData ? (
@@ -233,7 +233,7 @@ export default function TrendExplorer() {
             <h3 style={{ marginBottom: 4, fontSize: 15, fontWeight: 700 }}>
               {tab.label}
             </h3>
-            <p style={{ fontSize: 13, color: '#94a3b8', marginBottom: 24 }}>
+            <p style={{ fontSize: 13, color: 'var(--text-muted)', marginBottom: 24 }}>
               {tab.isMScore
                 ? `Values above ${THRESHOLD} indicate elevated manipulation risk (threshold shown as dashed line).`
                 : tab.isBeneish
@@ -243,15 +243,15 @@ export default function TrendExplorer() {
 
             <ResponsiveContainer width="100%" height={360}>
               <LineChart data={data} margin={{ top: 4, right: 24, left: 8, bottom: 4 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#f1f5f9" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="var(--sidebar-bg)" vertical={false} />
                 <XAxis
                   dataKey="year"
-                  tick={{ fontSize: 12, fill: '#64748b' }}
+                  tick={{ fontSize: 12, fill: 'var(--text-secondary)' }}
                   tickLine={false}
-                  axisLine={{ stroke: '#e2e8f0' }}
+                  axisLine={{ stroke: 'var(--border)' }}
                 />
                 <YAxis
-                  tick={{ fontSize: 11, fill: '#64748b' }}
+                  tick={{ fontSize: 11, fill: 'var(--text-secondary)' }}
                   tickLine={false}
                   axisLine={false}
                   tickFormatter={tab.isBeneish || tab.isMScore ? v => v.toFixed(1) : fmt}
@@ -285,10 +285,10 @@ export default function TrendExplorer() {
                 {tab.isBeneish && (
                   <ReferenceLine
                     y={1}
-                    stroke="#94a3b8"
+                    stroke="var(--text-muted)"
                     strokeDasharray="5 3"
                     strokeWidth={1.2}
-                    label={{ value: 'Neutral (1.0)', position: 'insideTopRight', fontSize: 10, fill: '#94a3b8' }}
+                    label={{ value: 'Neutral (1.0)', position: 'insideTopRight', fontSize: 10, fill: 'var(--text-muted)' }}
                   />
                 )}
 
@@ -297,9 +297,9 @@ export default function TrendExplorer() {
                     key={key}
                     type="monotone"
                     dataKey={key}
-                    stroke={colourMap[key] || '#94a3b8'}
+                    stroke={colourMap[key] || 'var(--text-muted)'}
                     strokeWidth={2.5}
-                    dot={{ r: 4, strokeWidth: 2, fill: '#fff', stroke: colourMap[key] || '#94a3b8' }}
+                    dot={{ r: 4, strokeWidth: 2, fill: '#fff', stroke: colourMap[key] || 'var(--text-muted)' }}
                     activeDot={{ r: 6 }}
                     connectNulls
                   />
@@ -313,17 +313,17 @@ export default function TrendExplorer() {
                 {tab.keys.map(key => (
                   <div key={key} style={{
                     display: 'flex', gap: 10, alignItems: 'flex-start',
-                    padding: '10px 12px', borderRadius: 8, background: '#f8fafc',
-                    border: '1px solid #f1f5f9', fontSize: 12,
+                    padding: '10px 12px', borderRadius: 8, background: 'var(--main-bg)',
+                    border: '1px solid var(--sidebar-bg)', fontSize: 12,
                   }}>
                     <span style={{
                       display: 'inline-block', width: 10, height: 10, borderRadius: '50%',
                       background: BENEISH_COLOURS[key], flexShrink: 0, marginTop: 2,
                     }} />
                     <div>
-                      <strong style={{ color: '#1e293b' }}>{key.toUpperCase()}</strong>
+                      <strong style={{ color: 'var(--text-primary)' }}>{key.toUpperCase()}</strong>
                       {' — '}
-                      <span style={{ color: '#64748b' }}>{BENEISH_DESC[key]}</span>
+                      <span style={{ color: 'var(--text-secondary)' }}>{BENEISH_DESC[key]}</span>
                     </div>
                   </div>
                 ))}
@@ -346,10 +346,10 @@ export default function TrendExplorer() {
 }
 
 function StatBadge({ label, value, highlight }) {
-  const colour = highlight === 'red' ? '#dc2626' : highlight === 'green' ? '#16a34a' : '#1e293b'
+  const colour = highlight === 'red' ? '#dc2626' : highlight === 'green' ? '#16a34a' : 'var(--text-primary)'
   return (
     <div className="card" style={{ padding: '16px 20px' }}>
-      <div style={{ fontSize: 12, color: '#94a3b8', marginBottom: 4 }}>{label}</div>
+      <div style={{ fontSize: 12, color: 'var(--text-muted)', marginBottom: 4 }}>{label}</div>
       <div style={{ fontSize: 22, fontWeight: 700, color: colour }}>{value}</div>
     </div>
   )
@@ -357,9 +357,9 @@ function StatBadge({ label, value, highlight }) {
 
 function EmptyState() {
   return (
-    <div style={{ padding: '60px 24px', textAlign: 'center', color: '#94a3b8' }}>
+    <div style={{ padding: '60px 24px', textAlign: 'center', color: 'var(--text-muted)' }}>
       <TrendingUp size={40} style={{ opacity: 0.3, marginBottom: 12 }} />
-      <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 6, color: '#475569' }}>No financial data yet</div>
+      <div style={{ fontWeight: 600, fontSize: 15, marginBottom: 6, color: 'var(--text-primary)' }}>No financial data yet</div>
       <div style={{ fontSize: 13 }}>
         Upload at least one year of financial statements via <strong>New Analysis</strong> to see trends here.
       </div>
