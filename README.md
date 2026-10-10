@@ -1,4 +1,4 @@
-# FinOmaly v0.1
+﻿# FinOmaly v0.1
 ### AI-Powered Financial Forensics & Anomaly Detection
 
 **Version 0.1.0**
@@ -24,6 +24,11 @@ FinOmaly aims to automate the preliminary analysis of corporate financial data, 
 - Present analysis results through an interactive dashboard.
 - Generate reports highlighting risk indicators and supporting financial figures.
 - Store company information, financial statements, and analysis results in a persistent database.
+
+## Completed Features
+- **Authentication & DB Setup:** Secure JWT login, Supabase integration, and SQLAlchemy ORM.
+- **Company Management:** CRUD endpoints for tracking target organizations.
+- **Financial Data Ingestion:** Full CSV intake pipeline with automated parsing and DB storage.
 
 ## Planned Features
 
@@ -92,44 +97,44 @@ FinOmaly aims to automate the preliminary analysis of corporate financial data, 
 
 ```text
 finomaly/
-├── frontend/                 # React + Vite application
-│   ├── public/
-│   ├── src/
-│   │   ├── assets/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── services/
-│   │   ├── hooks/
-│   │   ├── types/
-│   │   ├── App.jsx
-│   │   ├── main.jsx
-│   │   └── index.css
-│   ├── .env.example
-│   ├── package.json
-│   └── vite.config.js
-│
-├── backend/                  # FastAPI application
-│   ├── app/
-│   │   ├── api/
-│   │   │   └── routes/
-│   │   ├── core/
-│   │   ├── db/
-│   │   ├── models/
-│   │   ├── schemas/
-│   │   ├── services/
-│   │   ├── utils/
-│   │   └── main.py
-│   ├── tests/
-│   ├── migrations/
-│   ├── requirements.txt
-│   ├── Dockerfile
-│   └── .env.example
-│
-├── sample_data/
-├── docs/
-├── .gitignore
-├── README.md
-└── render.yaml
+â”œâ”€â”€ frontend/                 # React + Vite application
+â”‚   â”œâ”€â”€ public/
+â”‚   â”œâ”€â”€ src/
+â”‚   â”‚   â”œâ”€â”€ assets/
+â”‚   â”‚   â”œâ”€â”€ components/
+â”‚   â”‚   â”œâ”€â”€ pages/
+â”‚   â”‚   â”œâ”€â”€ services/
+â”‚   â”‚   â”œâ”€â”€ hooks/
+â”‚   â”‚   â”œâ”€â”€ types/
+â”‚   â”‚   â”œâ”€â”€ App.jsx
+â”‚   â”‚   â”œâ”€â”€ main.jsx
+â”‚   â”‚   â””â”€â”€ index.css
+â”‚   â”œâ”€â”€ .env.example
+â”‚   â”œâ”€â”€ package.json
+â”‚   â””â”€â”€ vite.config.js
+â”‚
+â”œâ”€â”€ backend/                  # FastAPI application
+â”‚   â”œâ”€â”€ app/
+â”‚   â”‚   â”œâ”€â”€ api/
+â”‚   â”‚   â”‚   â””â”€â”€ routes/
+â”‚   â”‚   â”œâ”€â”€ core/
+â”‚   â”‚   â”œâ”€â”€ db/
+â”‚   â”‚   â”œâ”€â”€ models/
+â”‚   â”‚   â”œâ”€â”€ schemas/
+â”‚   â”‚   â”œâ”€â”€ services/
+â”‚   â”‚   â”œâ”€â”€ utils/
+â”‚   â”‚   â””â”€â”€ main.py
+â”‚   â”œâ”€â”€ tests/
+â”‚   â”œâ”€â”€ migrations/
+â”‚   â”œâ”€â”€ requirements.txt
+â”‚   â”œâ”€â”€ Dockerfile
+â”‚   â””â”€â”€ .env.example
+â”‚
+â”œâ”€â”€ sample_data/
+â”œâ”€â”€ docs/
+â”œâ”€â”€ .gitignore
+â”œâ”€â”€ README.md
+â””â”€â”€ render.yaml
 ```
 
 The structure represents the intended organization of the application. Files and directories may be added as implementation progresses.
@@ -261,3 +266,4 @@ FinOmaly is under active development. The frontend, backend APIs, database integ
 ## License
 
 No license has been selected yet. Add a license before distributing the project publicly.
+
