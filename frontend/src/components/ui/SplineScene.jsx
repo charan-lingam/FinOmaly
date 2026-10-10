@@ -18,3 +18,4 @@ export default function SplineScene({ scene, style }) {
     </Suspense>
   );
 }
+

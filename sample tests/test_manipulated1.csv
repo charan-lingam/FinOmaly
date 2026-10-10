@@ -1,0 +1,3 @@
+year,net_sales,cogs,accounts_receivable,current_assets,ppe,total_assets,depreciation,current_liabilities,long_term_debt,total_liabilities,sga_expense,income_continuing_operations,cfo
+2000,100865,94517,20121,30541,15152,65503,1358,20623,14389,54033,4322,979,4744
+2001,155000,135000,42000,45000,16000,80000,1400,35000,20000,65000,3000,2500,-3000
