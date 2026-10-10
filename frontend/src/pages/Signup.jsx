@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom'
 import { UserPlus } from 'lucide-react'
 import CascadeText from '../components/ui/CascadeText'
 
+const API_BASE = import.meta.env.VITE_API_URL || 'https://finomaly-ejgp.onrender.com'
+
 export default function Signup() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -26,7 +28,7 @@ export default function Signup() {
         org_name: orgName || undefined
       }
 
-      const response = await fetch('https://finomaly-ejgp.onrender.com/api/v1/signup', {
+      const response = await fetch(`${API_BASE}/api/v1/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)

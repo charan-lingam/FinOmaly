@@ -55,6 +55,7 @@ export default function App() {
           <Route path="/trends" element={<ProtectedRoute isAuth={isAuth}><TrendExplorer /></ProtectedRoute>} />
           <Route path="/profile" element={<ProtectedRoute isAuth={isAuth}><Profile /></ProtectedRoute>} />
           <Route path="/settings" element={<ProtectedRoute isAuth={isAuth}><Settings /></ProtectedRoute>} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </KineticGrid>
     </BrowserRouter>

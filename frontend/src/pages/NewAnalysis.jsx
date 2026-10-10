@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react'
-import { FileSpreadsheet } from 'lucide-react'
-import FileUpload from '../components/ui/FileUpload'
+import { FileUploadCard } from '../components/ui/file-upload-card'
 
 const API_BASE = import.meta.env.VITE_API_URL || 'https://finomaly-ejgp.onrender.com'
 
 export default function NewAnalysis() {
   const [companies, setCompanies] = useState([])
   const [selectedCompanyId, setSelectedCompanyId] = useState('')
-  const [file, setFile] = useState(null)
+  const [files, setFiles] = useState([])
   const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
+  const [globalSuccess, setGlobalSuccess] = useState(false)
 
   useEffect(() => {
     const fetchCompanies = async () => {
@@ -26,79 +25,148 @@ export default function NewAnalysis() {
     fetchCompanies()
   }, [])
 
-  const handleUpload = async (e) => {
-    e.preventDefault()
-    if (!file || !selectedCompanyId) return
-    setLoading(true)
-    setSuccess(false)
-
-    try {
-      const token = localStorage.getItem('finomaly_token')
-      const formData = new FormData()
-      formData.append('file', file)
-
-      const res = await fetch(API_BASE + '/api/v1/statements/upload/' + selectedCompanyId, {
-        method: 'POST',
-        headers: { Authorization: 'Bearer ' + token },
-        body: formData
-      })
-
-      if (res.ok) {
-        setSuccess(true)
-        setFile(null)
-      } else {
-        const data = await res.json()
-        alert('Upload failed: ' + (data.detail || 'Unknown error'))
-      }
-    } catch (err) {
-      console.error(err)
-      alert('Error uploading file')
-    } finally {
-      setLoading(false)
-    }
+  const handleFilesChange = (newFiles) => {
+    const preparedFiles = newFiles.map(file => ({
+      id: Math.random().toString(36).substring(2, 9),
+      file,
+      progress: 0,
+      status: 'pending'
+    }))
+    setFiles(prev => [...prev, ...preparedFiles])
+    setGlobalSuccess(false)
   }
 
+  const handleFileRemove = (id) => {
+    setFiles(prev => prev.filter(f => f.id !== id))
+  }
+
+  const handleUpload = async (e) => {
+    e.preventDefault()
+    if (files.length === 0 || !selectedCompanyId) return
+    setLoading(true)
+    setGlobalSuccess(false)
+
+    const token = localStorage.getItem('finomaly_token')
+
+    for (const item of files) {
+      if (item.status === 'completed') continue
+
+      // Set to uploading
+      setFiles(prev => prev.map(f => f.id === item.id ? { ...f, status: 'uploading', progress: 30 } : f))
+
+      try {
+        const formData = new FormData()
+        formData.append('file', item.file)
+
+        // Simulate progress tick
+        setTimeout(() => {
+          setFiles(prev => prev.map(f => f.id === item.id && f.status === 'uploading' ? { ...f, progress: 75 } : f))
+        }, 300)
+
+        const res = await fetch(API_BASE + '/api/v1/statements/upload/' + selectedCompanyId, {
+          method: 'POST',
+          headers: { Authorization: 'Bearer ' + token },
+          body: formData
+        })
+
+        if (res.ok) {
+          setFiles(prev => prev.map(f => f.id === item.id ? { ...f, status: 'completed', progress: 100 } : f))
+          setGlobalSuccess(true)
+        } else {
+          const errData = await res.json().catch(() => ({}))
+          console.error('Upload failed:', errData)
+          setFiles(prev => prev.map(f => f.id === item.id ? { ...f, status: 'error', progress: 0 } : f))
+        }
+      } catch (err) {
+        console.error('Error uploading file:', err)
+        setFiles(prev => prev.map(f => f.id === item.id ? { ...f, status: 'error', progress: 0 } : f))
+      }
+    }
+
+    setLoading(false)
+  }
+
+  const pendingFilesCount = files.filter(f => f.status !== 'completed').length
+
   return (
-    <div className="page-container">
-      <div className="page-header">
+    <div className="page-container" style={{ maxWidth: 800, margin: '0 auto' }}>
+      <div className="page-header" style={{ marginBottom: 24 }}>
         <div>
           <h1 className="page-title">New Analysis / CSV Upload</h1>
-          <p className="page-description">Upload your canonical 13-variable CSV for a company.</p>
+          <p className="page-description">Upload your canonical 13-variable financial CSV data.</p>
         </div>
       </div>
 
-      <div className="card" style={{ padding: 24, maxWidth: 600 }}>
-        <form onSubmit={handleUpload} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          
-          <div>
-            <label style={{ display: 'block', marginBottom: 8, fontWeight: 500 }}>Select Target Company</label>
-            <select 
-              value={selectedCompanyId} 
-              onChange={e => setSelectedCompanyId(e.target.value)}
-              style={{ width: '100%', padding: 8, borderRadius: 6, border: '1px solid var(--border)' }}
-              required
-            >
-              <option value="" disabled>Select a company...</option>
-              {companies.map(c => (
-                <option key={c.id} value={c.id}>{c.name} ({c.ticker})</option>
-              ))}
-            </select>
-          </div>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+        {/* Company Selection Card */}
+        <div className="card" style={{ padding: 20 }}>
+          <label style={{ display: 'block', marginBottom: 8, fontWeight: 600, color: 'var(--text-primary)' }}>
+            Target Company
+          </label>
+          <select 
+            value={selectedCompanyId} 
+            onChange={e => setSelectedCompanyId(e.target.value)}
+            style={{ 
+              width: '100%', 
+              padding: '10px 14px', 
+              borderRadius: 8, 
+              border: '1px solid var(--border)',
+              backgroundColor: 'var(--main-bg)',
+              color: 'var(--text-primary)',
+              outline: 'none'
+            }}
+            required
+          >
+            <option value="" disabled>Select a company...</option>
+            {companies.map(c => (
+              <option key={c.id} value={c.id}>{c.name} ({c.ticker})</option>
+            ))}
+          </select>
+        </div>
 
-          <div className="mt-4">
-            <FileUpload onFileSelect={(selectedFile) => setFile(selectedFile)} />
-          </div>
+        {/* File Upload Component */}
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <FileUploadCard 
+            className="w-full"
+            files={files}
+            onFilesChange={handleFilesChange}
+            onFileRemove={handleFileRemove}
+          />
+        </div>
 
-          <button type="submit" disabled={loading || !file || !selectedCompanyId} className="btn btn-primary" style={{ justifyContent: 'center' }}>
-            {loading ? 'Uploading...' : 'Upload Data'}
+        {/* Submit Actions */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+          <button 
+            type="button"
+            onClick={handleUpload}
+            disabled={loading || pendingFilesCount === 0 || !selectedCompanyId} 
+            className="btn btn-primary" 
+            style={{ 
+              justifyContent: 'center', 
+              padding: '12px 20px', 
+              fontSize: '1rem',
+              fontWeight: 600,
+              cursor: (loading || pendingFilesCount === 0 || !selectedCompanyId) ? 'not-allowed' : 'pointer',
+              opacity: (loading || pendingFilesCount === 0 || !selectedCompanyId) ? 0.6 : 1
+            }}
+          >
+            {loading ? 'Uploading Files...' : pendingFilesCount > 0 ? `Upload ${pendingFilesCount} File(s)` : 'Select Files to Upload'}
           </button>
 
-          {success && (
-            <div style={{ padding: 12, backgroundColor: '#dcfce3', color: '#166534', borderRadius: 6, textAlign: 'center' }}>
-              Successfully uploaded and saved to the database!
+          {globalSuccess && (
+            <div style={{ 
+              padding: 14, 
+              backgroundColor: 'rgba(34, 197, 94, 0.15)', 
+              color: 'var(--green, #22c55e)', 
+              borderRadius: 8, 
+              textAlign: 'center',
+              border: '1px solid rgba(34, 197, 94, 0.3)',
+              fontWeight: 500
+            }}>
+              ✓ File(s) successfully processed and indexed!
             </div>
           )}
-        </form>
+        </div>
       </div>
     </div>
   )

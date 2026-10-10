@@ -3,6 +3,8 @@ import { useNavigate, Link } from 'react-router-dom'
 import { LogIn } from 'lucide-react'
 import CascadeText from '../components/ui/CascadeText'
 
+const API_BASE = import.meta.env.VITE_API_URL || 'https://finomaly-ejgp.onrender.com'
+
 export default function Login({ setAuth }) {
   const [email, setEmail] = useState('test@finomaly.com')
   const [password, setPassword] = useState('testpassword123')
@@ -13,7 +15,7 @@ export default function Login({ setAuth }) {
 
   const handleSeed = async () => {
     try {
-      await fetch('https://finomaly-ejgp.onrender.com/api/v1/seed', { method: 'POST' })
+      await fetch(`${API_BASE}/api/v1/seed`, { method: 'POST' })
       alert('Test user seeded in database!')
     } catch (err) {
       console.error(err)
@@ -31,7 +33,7 @@ export default function Login({ setAuth }) {
       formData.append('username', email)
       formData.append('password', password)
 
-      const response = await fetch('https://finomaly-ejgp.onrender.com/api/v1/login/access-token', {
+      const response = await fetch(`${API_BASE}/api/v1/login/access-token`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: formData.toString()
