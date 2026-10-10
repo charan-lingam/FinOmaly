@@ -26,8 +26,15 @@ def get_company_analysis(
     if not company:
         raise HTTPException(status_code=404, detail="Company not found or unauthorized")
 
-    # Get statements for the company ordered by year desc
-    statements = db.query(FinancialStatement).filter(FinancialStatement.company_id == company_id).order_by(FinancialStatement.year.desc()).all()
+    # Get statements for the company ordered by year desc, then created_at desc
+    raw_statements = db.query(FinancialStatement).filter(FinancialStatement.company_id == company_id).order_by(FinancialStatement.year.desc(), FinancialStatement.created_at.desc()).all()
+    
+    statements = []
+    seen_years = set()
+    for s in raw_statements:
+        if s.year not in seen_years:
+            statements.append(s)
+            seen_years.add(s.year)
     
     if len(statements) < 2:
         return [] # Need at least 2 years to calculate
@@ -49,3 +56,4 @@ def get_company_analysis(
         ))
         
     return analyses
+
