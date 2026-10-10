@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+﻿import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Sidebar from './components/layout/Sidebar'
 import Navbar from './components/layout/Navbar'
@@ -7,6 +7,7 @@ import Companies from './pages/Companies'
 import NewAnalysis from './pages/NewAnalysis'
 import AnalysisReport from './pages/AnalysisReport'
 import Login from './pages/Login'
+import CompanyDetails from './pages/CompanyDetails'
 
 function AppLayout({ children }) {
   return (
@@ -39,10 +40,12 @@ export default function App() {
         
         <Route path="/" element={<ProtectedRoute isAuth={isAuth}><Dashboard /></ProtectedRoute>} />
         <Route path="/companies" element={<ProtectedRoute isAuth={isAuth}><Companies /></ProtectedRoute>} />
+        <Route path="/companies/:id" element={<ProtectedRoute isAuth={isAuth}><CompanyDetails /></ProtectedRoute>} />
         <Route path="/analysis/new" element={<ProtectedRoute isAuth={isAuth}><NewAnalysis /></ProtectedRoute>} />
         <Route path="/analysis/report" element={<ProtectedRoute isAuth={isAuth}><AnalysisReport /></ProtectedRoute>} />
       </Routes>
     </BrowserRouter>
   )
 }
+
 

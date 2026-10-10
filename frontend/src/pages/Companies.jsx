@@ -102,6 +102,7 @@ export default function Companies() {
                 <th style={{ padding: 12 }}>Name</th>
                 <th style={{ padding: 12 }}>Ticker</th>
                 <th style={{ padding: 12 }}>Industry</th>
+                <th style={{ padding: 12 }}>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -112,6 +113,11 @@ export default function Companies() {
                   </td>
                   <td style={{ padding: 12 }}>{c.ticker}</td>
                   <td style={{ padding: 12 }}>{c.industry}</td>
+                  <td style={{ padding: 12 }}>
+                    <Link to={`/companies/${c.id}`} className="btn btn-outline" style={{ padding: '4px 12px', fontSize: 14 }}>
+                      View Details
+                    </Link>
+                  </td>
                 </tr>
               ))}
             </tbody>
@@ -121,3 +127,5 @@ export default function Companies() {
     </div>
   )
 }
+
+
