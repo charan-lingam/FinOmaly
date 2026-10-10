@@ -115,7 +115,7 @@ export default function Profile() {
           </div>
           <div className="card-body" style={{ paddingTop: 20 }}>
             <p className="text-secondary" style={{ fontSize: 14 }}>
-              Theme preferences are now controlled via the toggle in the navigation bar. Additional notification settings and API keys will be available in a future update.
+              Theme preferences are locked to Dark Mode for the best experience with the interactive background. Additional notification settings and API keys will be available in a future update.
             </p>
           </div>
         </div>

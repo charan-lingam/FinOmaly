@@ -90,7 +90,7 @@ body {
   font-family: var(--font);
   font-size: 14px;
   color: var(--text-primary);
-  background: var(--main-bg);
+  background: transparent;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -593,7 +593,7 @@ tbody td {
   --ring: 212.7 26.8% 83.9%;
 
   /* Sidebar */
-  --sidebar-bg: #1e293b;
+  --sidebar-bg: rgba(30, 41, 59, 0.7);
   --sidebar-border: #334155;
   --sidebar-text: #94a3b8;
   --sidebar-text-active: #f1f5f9;
@@ -602,9 +602,9 @@ tbody td {
   --sidebar-accent-bg: #334155;
 
   /* Main content */
-  --main-bg: #0f172a;
-  --navbar-bg: #1e293b;
-  --card-bg: #1e293b;
+  --main-bg: transparent;
+  --navbar-bg: rgba(30, 41, 59, 0.7);
+  --card-bg: rgba(30, 41, 59, 0.6);
 
   /* Text */
   --text-primary: #f1f5f9;

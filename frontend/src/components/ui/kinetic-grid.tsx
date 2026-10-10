@@ -376,19 +376,12 @@ export default function KineticGrid({
   // ── Render ──────────────────────────────────────────────────────────────────
 
   return (
-    <div
-      className={cn(
-        "relative w-full h-full overflow-hidden",
-        globalColor === "monochrome" ? "bg-[#000000]" : "bg-[#020617]",
-        className,
-      )}
-    >
+    <>
       <canvas
         ref={canvasRef}
-        className="absolute inset-0 w-full h-full z-0 pointer-events-none"
+        className="fixed inset-0 w-screen h-screen -z-10 pointer-events-none"
       />
-
-      <div className="relative z-10 w-full h-full">{children}</div>
-    </div>
+      {children}
+    </>
   );
 }

@@ -7,13 +7,13 @@ import { GlassFilter, GlassButton, GlassEffect } from '../components/ui/LiquidGl
 import { ArrowRight, ShieldAlert, BarChart3, Lock } from 'lucide-react';
 import FeaturedProjectHeroDemo from '../components/ui/featured-project-demo';
 
-import KineticGrid from '../components/ui/kinetic-grid';
+
 
 export default function Landing() {
   const navigate = useNavigate();
 
   return (
-    <KineticGrid globalColor="default" className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen">
       <GlassFilter />
       
       {/* Navbar */}
@@ -33,6 +33,6 @@ export default function Landing() {
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <FeaturedProjectHeroDemo />
       </div>
-    </KineticGrid>
+    </div>
   );
 }

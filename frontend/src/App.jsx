@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import KineticGrid from './components/ui/kinetic-grid'
 import Sidebar from './components/layout/Sidebar'
 import Navbar from './components/layout/Navbar'
 import Dashboard from './pages/Dashboard'
@@ -39,19 +40,21 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/welcome" element={isAuth ? <Navigate to="/" replace /> : <Landing />} />
-        <Route path="/login" element={isAuth ? <Navigate to="/" replace /> : <Login setAuth={setIsAuth} />} />
-        <Route path="/signup" element={isAuth ? <Navigate to="/" replace /> : <Signup />} />
-        
-        <Route path="/" element={<ProtectedRoute isAuth={isAuth}><Dashboard /></ProtectedRoute>} />
-        <Route path="/companies" element={<ProtectedRoute isAuth={isAuth}><Companies /></ProtectedRoute>} />
-        <Route path="/companies/:id" element={<ProtectedRoute isAuth={isAuth}><CompanyDetails /></ProtectedRoute>} />
-        <Route path="/analysis/new" element={<ProtectedRoute isAuth={isAuth}><NewAnalysis /></ProtectedRoute>} />
-        <Route path="/analysis/report" element={<ProtectedRoute isAuth={isAuth}><AnalysisReport /></ProtectedRoute>} />
-        <Route path="/trends" element={<ProtectedRoute isAuth={isAuth}><TrendExplorer /></ProtectedRoute>} />
-        <Route path="/profile" element={<ProtectedRoute isAuth={isAuth}><Profile /></ProtectedRoute>} />
-      </Routes>
+      <KineticGrid>
+        <Routes>
+          <Route path="/welcome" element={isAuth ? <Navigate to="/" replace /> : <Landing />} />
+          <Route path="/login" element={isAuth ? <Navigate to="/" replace /> : <Login setAuth={setIsAuth} />} />
+          <Route path="/signup" element={isAuth ? <Navigate to="/" replace /> : <Signup />} />
+          
+          <Route path="/" element={<ProtectedRoute isAuth={isAuth}><Dashboard /></ProtectedRoute>} />
+          <Route path="/companies" element={<ProtectedRoute isAuth={isAuth}><Companies /></ProtectedRoute>} />
+          <Route path="/companies/:id" element={<ProtectedRoute isAuth={isAuth}><CompanyDetails /></ProtectedRoute>} />
+          <Route path="/analysis/new" element={<ProtectedRoute isAuth={isAuth}><NewAnalysis /></ProtectedRoute>} />
+          <Route path="/analysis/report" element={<ProtectedRoute isAuth={isAuth}><AnalysisReport /></ProtectedRoute>} />
+          <Route path="/trends" element={<ProtectedRoute isAuth={isAuth}><TrendExplorer /></ProtectedRoute>} />
+          <Route path="/profile" element={<ProtectedRoute isAuth={isAuth}><Profile /></ProtectedRoute>} />
+        </Routes>
+      </KineticGrid>
     </BrowserRouter>
   )
 }
