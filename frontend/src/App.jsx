@@ -8,6 +8,7 @@ import NewAnalysis from './pages/NewAnalysis'
 import AnalysisReport from './pages/AnalysisReport'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import Landing from './pages/Landing'
 import CompanyDetails from './pages/CompanyDetails'
 
 function AppLayout({ children }) {
@@ -26,7 +27,7 @@ function AppLayout({ children }) {
 
 function ProtectedRoute({ isAuth, children }) {
   if (!isAuth) {
-    return <Navigate to="/login" replace />
+    return <Navigate to="/welcome" replace />
   }
   return <AppLayout>{children}</AppLayout>
 }
@@ -37,6 +38,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/welcome" element={isAuth ? <Navigate to="/" replace /> : <Landing />} />
         <Route path="/login" element={isAuth ? <Navigate to="/" replace /> : <Login setAuth={setIsAuth} />} />
         <Route path="/signup" element={isAuth ? <Navigate to="/" replace /> : <Signup />} />
         
