@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import { Bell, User } from 'lucide-react'
 import { ModeToggle } from '../mode-toggle'
 
@@ -34,23 +34,7 @@ export default function Navbar() {
           <Bell size={14} />
         </button>
 
-        <div
-          style={{
-            width: 32,
-            height: 32,
-            borderRadius: '50%',
-            background: '#e2e8f0',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: '#64748b',
-            cursor: 'not-allowed',
-            opacity: 0.6,
-          }}
-          title="User Profile — Auth TBD"
-        >
-          <User size={15} />
-        </div>
+        <Link to="/profile" style={{width:32,height:32,borderRadius:"50%",background:"var(--blue-light)",display:"flex",alignItems:"center",justifyContent:"center",color:"var(--blue)",cursor:"pointer",textDecoration:"none"}} title="User Profile"><User size={15} /></Link>
       </div>
     </header>
   )

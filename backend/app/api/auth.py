@@ -93,3 +93,11 @@ def signup(data: UserSignup, db: Session = Depends(get_db)):
     db.commit()
     
     return {"msg": "Signup successful"}
+
+from app.api.deps import get_current_user
+from app.schemas.user import UserResponse
+
+@router.get("/users/me", response_model=UserResponse)
+def read_users_me(current_user: User = Depends(get_current_user)):
+    """Get current user."""
+    return current_user
