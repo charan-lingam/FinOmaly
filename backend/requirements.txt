@@ -1,0 +1,22 @@
+# Web framework & server
+fastapi
+uvicorn[standard]
+
+# Database
+sqlalchemy
+psycopg[binary]
+alembic
+
+# Configuration
+pydantic-settings
+
+# Data processing
+pandas
+numpy
+openpyxl
+python-multipart
+
+# Testing
+pytest
+httpx
+
