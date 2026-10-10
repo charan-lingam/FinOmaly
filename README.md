@@ -1,7 +1,11 @@
-# FinOmaly
+# FinOmaly v0.1
 ### AI-Powered Financial Forensics & Anomaly Detection
 
+**Version 0.1.0**
+
 **FinOmaly** is a financial analysis application designed to identify suspicious patterns and potential irregularities in corporate financial statements. It helps investors, chartered accountants, auditors, and financial analysts screen companies more efficiently by automating financial ratio analysis, Beneish M-Score calculation, and anomaly detection.
+
+This is the initial v0.1 milestone release, representing the project foundation, repository structure, and early architecture for the FinOmaly platform.
 
 > **Note:** FinOmaly is a project under development. Features described here represent the intended functionality and may not yet be fully implemented.
 
