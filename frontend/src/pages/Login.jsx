@@ -49,7 +49,25 @@ export default function Login({ setAuth }) {
   }
 
   return (
-    <div style={{ display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--main-bg)' }}>
+    <div style={{ position: 'relative', display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--main-bg)' }}>
+      {/* Top right attribution */}
+      <div style={{ 
+        position: 'absolute', 
+        top: 24, 
+        right: 28, 
+        fontSize: '13px', 
+        color: 'var(--text-secondary)', 
+        background: 'rgba(255, 255, 255, 0.04)',
+        border: '1px solid var(--border)',
+        padding: '6px 14px',
+        borderRadius: 20,
+        fontWeight: 500,
+        backdropFilter: 'blur(8px)',
+        boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)'
+      }}>
+        developed by <span style={{ color: 'var(--blue, #3b82f6)', fontWeight: 600 }}>Trinetra189.</span>
+      </div>
+
       <div style={{ width: 400, padding: 32, backgroundColor: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: 8, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
         
         {/* Auth Toggle Buttons above FinOmaly name */}

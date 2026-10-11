@@ -26,7 +26,19 @@ export default function Navbar() {
       </div>
 
       {/* Right side actions */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <span style={{ 
+          fontSize: '12px', 
+          color: 'var(--text-secondary)', 
+          background: 'rgba(255, 255, 255, 0.04)',
+          border: '1px solid var(--border)',
+          padding: '4px 10px',
+          borderRadius: 20,
+          fontWeight: 500 
+        }}>
+          developed by <span style={{ color: 'var(--blue, #3b82f6)', fontWeight: 600 }}>Trinetra189.</span>
+        </span>
+
         <ModeToggle />
         <button
           className="btn btn-outline btn-sm"
