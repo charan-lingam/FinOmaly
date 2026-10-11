@@ -3,7 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom'
 import {
   ArrowLeft, Building2, AlertTriangle, CheckCircle2,
   ChevronDown, ChevronRight, TrendingUp, FileBarChart2,
-  UploadCloud, Info,
+  UploadCloud, Info, ShieldAlert, Search,
 } from 'lucide-react'
 import { WaveLoader } from '../components/ui/wave-loader'
 import {

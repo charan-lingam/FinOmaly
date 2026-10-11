@@ -115,3 +115,112 @@ def test_generate_forensic_report(sample_statements):
     assert isinstance(md, str)
     assert "# FinOmaly Forensic Audit Report: Acme Forensics" in md
 
+
+def test_sync_company_analyses_stores_indicators_in_database():
+    import uuid
+    from sqlalchemy import create_engine
+    from sqlalchemy.orm import sessionmaker
+    from app.db.base import Base
+    from app.models.company import Company
+    from app.models.user import Organization
+    from app.models.financial import FinancialStatement
+    from app.models.analysis import AnalysisRun, BeneishIndicator, AnomalyFinding
+    from app.services.analysis_persistence import sync_company_analyses
+
+    engine = create_engine("sqlite:///:memory:")
+    Base.metadata.create_all(engine)
+    Session = sessionmaker(bind=engine)
+    db = Session()
+
+    org_id = uuid.uuid4()
+    org = Organization(id=org_id, name="Test Org")
+    db.add(org)
+
+    comp_id = uuid.uuid4()
+    comp = Company(id=comp_id, organization_id=org_id, name="Enron Test Corp", industry="Energy", ticker="ETEST")
+    db.add(comp)
+
+    # 2 consecutive statements
+    s2022 = FinancialStatement(
+        id=uuid.uuid4(),
+        company_id=comp_id,
+        year="2022",
+        net_sales=1000000,
+        cogs=600000,
+        accounts_receivable=100000,
+        current_assets=400000,
+        ppe=500000,
+        total_assets=1000000,
+        depreciation=50000,
+        current_liabilities=200000,
+        long_term_debt=200000,
+        total_liabilities=400000,
+        sga_expense=150000,
+        income_continuing_operations=100000,
+        cfo=120000,
+    )
+    s2023 = FinancialStatement(
+        id=uuid.uuid4(),
+        company_id=comp_id,
+        year="2023",
+        net_sales=1200000,
+        cogs=800000,
+        accounts_receivable=250000,
+        current_assets=600000,
+        ppe=550000,
+        total_assets=1300000,
+        depreciation=30000,
+        current_liabilities=400000,
+        long_term_debt=300000,
+        total_liabilities=700000,
+        sga_expense=200000,
+        income_continuing_operations=150000,
+        cfo=-50000,
+    )
+    db.add_all([s2022, s2023])
+    db.commit()
+
+    # Verify initially 0 stored indicators in db
+    assert db.query(BeneishIndicator).count() == 0
+    assert db.query(AnalysisRun).count() == 0
+
+    # Execute sync_company_analyses
+    runs = sync_company_analyses(db, comp_id)
+    assert len(runs) == 1
+    run = runs[0]
+
+    # Verify AnalysisRun was stored in database
+    db_run = db.query(AnalysisRun).filter(AnalysisRun.id == run.id).first()
+    assert db_run is not None
+    assert db_run.m_score is not None
+    assert db_run.company_id == comp_id
+
+    # Verify all 8 Beneish Indicators are stored in database
+    db_indicators = db.query(BeneishIndicator).filter(BeneishIndicator.analysis_id == run.id).all()
+    assert len(db_indicators) == 8
+
+    symbols = {ind.symbol: ind for ind in db_indicators}
+    for expected_sym in ["DSRI", "GMI", "AQI", "SGI", "DEPI", "SGAI", "LVGI", "TATA"]:
+        assert expected_sym in symbols
+        ind = symbols[expected_sym]
+        assert ind.value is not None
+        assert ind.coefficient is not None
+        assert ind.contribution is not None
+
+    # Verify Anomaly Findings stored in database
+    db_findings = db.query(AnomalyFinding).filter(AnomalyFinding.analysis_id == run.id).all()
+    assert len(db_findings) > 0
+    for finding in db_findings:
+        assert finding.severity in ["critical", "high", "medium", "low"]
+        assert finding.metric_flagged != ""
+        assert finding.title != ""
+
+    # Verify idempotency (calling sync again should update, not duplicate)
+    runs_again = sync_company_analyses(db, comp_id)
+    assert len(runs_again) == 1
+    assert db.query(AnalysisRun).count() == 1
+    assert db.query(BeneishIndicator).count() == 8
+
+    db.close()
+
+

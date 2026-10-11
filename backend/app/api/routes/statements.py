@@ -1,4 +1,4 @@
-﻿from fastapi import APIRouter, Depends, UploadFile, File, HTTPException, status
+from fastapi import APIRouter, Depends, UploadFile, File, HTTPException, status
 from sqlalchemy.orm import Session
 from typing import List
 import uuid
@@ -11,6 +11,7 @@ from app.models.financial import FinancialStatement
 from app.schemas.statement import StatementResponse
 from app.api.deps import get_current_user
 from app.models.user import User
+from app.services.analysis_persistence import sync_company_analyses
 
 router = APIRouter()
 
@@ -82,5 +83,8 @@ async def upload_csv_statement(
     db.commit()
     for s in statements_created:
         db.refresh(s)
+
+    # Automatically calculate and persist Beneish indicators and AnalysisRun in the database
+    sync_company_analyses(db, company.id)
 
     return statements_created
