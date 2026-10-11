@@ -13,15 +13,6 @@ export default function Login({ setAuth }) {
   
   const navigate = useNavigate()
 
-  const handleSeed = async () => {
-    try {
-      await fetch(`${API_BASE}/api/v1/seed`, { method: 'POST' })
-      alert('Test user seeded in database!')
-    } catch (err) {
-      console.error(err)
-    }
-  }
-
   const handleLogin = async (e) => {
     e.preventDefault()
     setError('')
@@ -105,20 +96,12 @@ export default function Login({ setAuth }) {
         </form>
 
         <div style={{ marginTop: 24, paddingTop: 16, borderTop: '1px solid var(--border)', textAlign: 'center' }}>
-          <p style={{ fontSize: 14, color: 'var(--text-secondary)', marginBottom: 12 }}>
+          <p style={{ fontSize: 14, color: 'var(--text-secondary)' }}>
             Don't have an account?{' '}
             <Link to="/signup" style={{ color: '#2563eb', textDecoration: 'none', fontWeight: 500 }}>
               Sign up
             </Link>
           </p>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8, justifyContent: 'center', marginTop: 16 }}>
-            <span style={{ height: 1, backgroundColor: 'var(--border)', flex: 1 }}></span>
-            <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>OR</span>
-            <span style={{ height: 1, backgroundColor: 'var(--border)', flex: 1 }}></span>
-          </div>
-          <button onClick={handleSeed} type="button" className="btn btn-outline" style={{ fontSize: 12, padding: '4px 8px', marginTop: 16 }}>
-            Seed Demo User
-          </button>
         </div>
       </div>
     </div>
