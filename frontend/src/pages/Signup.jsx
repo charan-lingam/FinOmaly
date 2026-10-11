@@ -162,15 +162,6 @@ export default function Signup() {
             {loading ? 'Creating Account...' : <><UserPlus size={16} /> Sign Up</>}
           </button>
         </form>
-
-        <div style={{ marginTop: 24, paddingTop: 16, borderTop: '1px solid var(--border)', textAlign: 'center' }}>
-          <p style={{ fontSize: 14, color: 'var(--text-secondary)' }}>
-            Already have an account?{' '}
-            <Link to="/login" style={{ color: '#2563eb', textDecoration: 'none', fontWeight: 500 }}>
-              Sign in
-            </Link>
-          </p>
-        </div>
       </div>
     </div>
   )

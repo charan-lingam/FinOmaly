@@ -141,15 +141,6 @@ export default function Login({ setAuth }) {
             {loading ? 'Signing in...' : <><LogIn size={16} /> Sign In</>}
           </button>
         </form>
-
-        <div style={{ marginTop: 24, paddingTop: 16, borderTop: '1px solid var(--border)', textAlign: 'center' }}>
-          <p style={{ fontSize: 14, color: 'var(--text-secondary)' }}>
-            Don't have an account?{' '}
-            <Link to="/signup" style={{ color: '#2563eb', textDecoration: 'none', fontWeight: 500 }}>
-              Sign up
-            </Link>
-          </p>
-        </div>
       </div>
     </div>
   )
