@@ -51,6 +51,53 @@ export default function Login({ setAuth }) {
   return (
     <div style={{ display: 'flex', height: '100vh', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--main-bg)' }}>
       <div style={{ width: 400, padding: 32, backgroundColor: 'var(--card-bg)', border: '1px solid var(--border)', borderRadius: 8, boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)' }}>
+        
+        {/* Auth Toggle Buttons above FinOmaly name */}
+        <div style={{ 
+          display: 'flex', 
+          gap: 6, 
+          width: '100%', 
+          marginBottom: 20, 
+          background: 'rgba(255, 255, 255, 0.04)', 
+          border: '1px solid var(--border)', 
+          borderRadius: 8, 
+          padding: 4 
+        }}>
+          <Link 
+            to="/login"
+            style={{ 
+              flex: 1, 
+              textAlign: 'center', 
+              padding: '7px 12px', 
+              borderRadius: 6, 
+              fontSize: 13, 
+              fontWeight: 600,
+              textDecoration: 'none',
+              backgroundColor: 'var(--blue, #3b82f6)',
+              color: '#ffffff',
+              boxShadow: '0 2px 6px rgba(59, 130, 246, 0.25)'
+            }}
+          >
+            Login
+          </Link>
+          <Link 
+            to="/signup"
+            style={{ 
+              flex: 1, 
+              textAlign: 'center', 
+              padding: '7px 12px', 
+              borderRadius: 6, 
+              fontSize: 13, 
+              fontWeight: 600,
+              textDecoration: 'none',
+              backgroundColor: 'transparent',
+              color: 'var(--text-secondary)'
+            }}
+          >
+            Sign Up
+          </Link>
+        </div>
+
         <div style={{ textAlign: 'center', marginBottom: 24, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <CascadeText text="FinOmaly" as="div" fontSize="32px" color="var(--text-primary)" hoverColor="#2563eb" />
           <p style={{ color: 'var(--text-secondary)', marginTop: 8 }}>Sign in to access your dashboard</p>
