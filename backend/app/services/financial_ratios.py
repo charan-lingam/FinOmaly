@@ -118,3 +118,4 @@ def compute_multi_year_ratios(statements: List[Any]) -> List[Dict[str, Any]]:
             "ratios": ratios
         })
     return series
+

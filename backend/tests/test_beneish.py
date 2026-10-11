@@ -114,3 +114,4 @@ def test_calculate_m_score_manipulator_profile():
     assert result["m_score"] is not None
     assert result["m_score"] > -1.78
     assert result["is_manipulator"] is True
+

@@ -114,3 +114,4 @@ def test_generate_forensic_report(sample_statements):
     md = generate_markdown_report(report)
     assert isinstance(md, str)
     assert "# FinOmaly Forensic Audit Report: Acme Forensics" in md
+

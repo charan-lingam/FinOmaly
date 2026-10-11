@@ -24,3 +24,4 @@ def test_ping_endpoint():
     response = client.get("/ping")
     assert response.status_code == 200
     assert response.json() == {"ping": "pong"}
+
