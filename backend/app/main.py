@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from app.core.config import settings
 from app.api import auth
-from app.api.routes import companies, statements, analyses, trends
+from app.api.routes import companies, statements, analyses, trends, health
 
 app = FastAPI(
     title=settings.PROJECT_NAME,
@@ -22,6 +22,7 @@ if settings.CORS_ORIGINS:
         allow_headers=["*"],
     )
 
+app.include_router(health.router, tags=["health"])
 app.include_router(auth.router, prefix=settings.API_PREFIX, tags=["auth"])
 app.include_router(companies.router, prefix=f"{settings.API_PREFIX}/companies", tags=["companies"])
 app.include_router(statements.router, prefix=f"{settings.API_PREFIX}/statements", tags=["statements"])
